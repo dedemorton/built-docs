@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lookup join hits | Elasticsearch Guide [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch Guide [master]"/>
+<link rel="up" href="search-your-data.html" title="Search your data"/>
+<link rel="prev" href="async-search-intro.html" title="Long-running searches"/>
+<link rel="next" href="near-real-time.html" title="Near real-time search"/>
+<meta name="DC.type" content="Learn/Docs/Elasticsearch/Reference/master"/>
+<meta name="DC.subject" content="Elasticsearch"/>
+<meta name="DC.identifier" content="master"/>
+</head>
+<body><div class="page_header">
+You are looking at preliminary documentation for a future release.
+Not what you want? See the
+<a href="../current/index.html">current release documentation</a>.
+</div>
+<div id="content">
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch Guide [master]</a></span>
+»
+<span class="breadcrumb-link"><a href="search-your-data.html">Search your data</a></span>
+»
+<span class="breadcrumb-node">Lookup join hits</span>
+</div>
+<div class="navheader">
+<span class="prev">
+<a href="async-search-intro.html">« Long-running searches</a>
+</span>
+<span class="next">
+<a href="near-real-time.html">Near real-time search »</a>
+</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div><div>
+<h2 class="title"><a id="lookup-join-hits"></a>Lookup join hits<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/search/search-your-data/lookup-join-hits.asciidoc">edit</a></h2>
+</div></div></div>
+<p>The <code class="literal">join_hits</code> option is used to enrich search hits with corresponding
+documents from related indices.</p>
+<p>The following search returns the detailed document from the <code class="literal">sensors</code>
+index for each search hit from the <code class="literal">sensor-logs</code> index.</p>
+<a id="27b8b1da74b56d40b48a98912c5f4d3c"></a>
+<div class="pre_wrapper lang-console">
+<pre class="programlisting prettyprint lang-console">GET sensor-logs/_search
+{
+  "query": {
+    "range": {
+        "temperature": {
+            "gt": 100
+        }
+    }
+  },
+  "sort": ["timestamp", "sensor_id"],
+  "join_hits": [
+    {
+        "name": "sensor", <a id="CO179-1"></a><i class="conum" data-value="1"></i>
+        "index": "sensors", <a id="CO179-2"></a><i class="conum" data-value="2"></i>
+        "match_field": "sensor_id" <a id="CO179-3"></a><i class="conum" data-value="3"></i>
+    }
+  ]
+}</pre>
+</div>
+<div class="console_widget" data-snippet="snippets/738.console"></div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO179-1"><i class="conum" data-value="1"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>The group name of join hits returned under this lookup request</p>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO179-2"><i class="conum" data-value="2"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>The name of the external index to lookup</p>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO179-3"><i class="conum" data-value="3"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>The name of the field whose values are used to lookup join hits.
+In this example, the search request looks up <code class="literal">sensor</code> documents from
+the <code class="literal">sensors</code> index whose <code class="literal">_id</code> matches the <code class="literal">sensor_id</code> field of the
+documents of the <code class="literal">sensor-logs</code> index.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>The search returns</p>
+<div class="pre_wrapper lang-console-response">
+<pre class="programlisting prettyprint lang-console-response">{
+    ...,
+    "hits":{
+        "total": {...},
+        "max_score": null,
+        "hits":[
+            {
+                "_index": "sensor-logs",
+                "_id": "hit_id_0",
+                "_score": null,
+                "_source":{
+                    "sensor_id": "s1",
+                    "temperature": 101,
+                    "timestamp": "2021-08-29 06:20:40"
+                },
+                "sort": [...],
+                "join_hits": {
+                    "sensor": [ <a id="CO180-1"></a><i class="conum" data-value="1"></i>
+                        {
+                            "_id": "s1", <a id="CO180-2"></a><i class="conum" data-value="2"></i>
+                            "_source": <a id="CO180-3"></a><i class="conum" data-value="3"></i>
+                            {
+                                "model": "basic",
+                                "location": "Living room",
+                                "make": "Honeywell"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "_index": "sensor-logs",
+                "_id": "hit_id_1",
+                "_score": null,
+                "_source":{
+                    "sensor_id": "s2",
+                    "temperature": 103,
+                    "timestamp": "2021-08-29 06:20:40"
+                },
+                "sort": [...],
+                "join_hits":{
+                    "sensor":[
+                        {
+                            "_id": "s2",
+                            "_source": {
+                                "model": "premium",
+                                "location": "Office",
+                                "make": "Nest"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}</pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO180-1"><i class="conum" data-value="1"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>The list of join hits for a lookup request for a single search hit</p>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO180-2"><i class="conum" data-value="2"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>The <code class="literal">_id</code> of a returned join hit</p>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO180-3"><i class="conum" data-value="3"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>The <code class="literal">_source</code> of a returned join hit. <a class="xref" href="search-request-body.html#request-body-search-source-filtering" title="Source filtering">Source filtering</a>
+can be used to filter the <code class="literal">_source</code> of join hits.</p>
+</td>
+</tr>
+</table>
+</div>
+<h3><a id="join-hits-notes"></a>Notes<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/search/search-your-data/lookup-join-hits.asciidoc">edit</a></h3>
+<div class="important admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>Queries with join hits are considered expensive. If
+<a class="xref" href="query-dsl.html#query-dsl-allow-expensive-queries"><code class="literal">search.allow_expensive_queries</code></a>
+is set to <code class="literal">false</code>, expensive queries are not allowed and Elasticsearch will
+reject any queries with join hits.</p>
+</div>
+</div>
+<p>If a search performance with join hits is an issue, you might consider
+<a class="xref" href="ingest-enriching-data.html" title="Enrich your data">enrich data</a> at indexing time instead.
+The <a class="xref" href="enrich-processor.html" title="Enrich processor">enrich processor</a> allows you to add data from existing
+indices to incoming documents during ingest. Comparing to join hits lookup, this
+approach uses more disk space, decreases indexing throughput, and has to reindex
+when the data of the join indices change. However, it offers a better search
+performance.</p>
+</div>
+<div class="navfooter">
+<span class="prev">
+<a href="async-search-intro.html">« Long-running searches</a>
+</span>
+<span class="next">
+<a href="near-real-time.html">Near real-time search »</a>
+</span>
+</div>
+</div>
+</body>
+</html>
