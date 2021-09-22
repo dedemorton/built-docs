@@ -212,6 +212,19 @@ please use the more specific <code class="literal">fixed_interval</code> or <cod
 parameters.</p>
 </div>
 </details>
+<details id="booleans-as-dates">
+<summary class="title">Running date aggregations on <code class="literal">boolean</code> fields is now an error</summary>
+<div class="content">
+<p><span class="strong strong"><strong>Details</strong></span><br>
+The <code class="literal">date-histogram</code>, <code class="literal">auto-date-histogram</code>, and <code class="literal">date-range</code> aggregations will
+no longer operate on boolean fields.  We never intended them to accept boolean
+fields, and they never did anything terribly useful in that case (as the values
+are treated as 0 and 1 millisecond past epoch).
+<span class="strong strong"><strong>Impact</strong></span><br>
+Running a date-based aggregation on a boolean field will now generate a runtime
+error.</p>
+</div>
+</details>
 <h4><a id="breaking_80_allocation_changes"></a>Allocation changes<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/migrate_8_0/allocation.asciidoc">edit</a></h4>
 <details id="breaking_80_allocation_change_flood_stage_block_always_removed">
 <summary class="title">The automatic removal of flood-stage blocks is no longer optional.</summary>
