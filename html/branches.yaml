@@ -4694,7 +4694,7 @@ logstash-docs:
   Logstash Reference/docs/7.8: d0041d3886fc2acbce2a5b15a5b565e93d3661c6
   Logstash Reference/docs/7.9: 3050e03b72e34f669f620714abbafb35cb9e7d8f
   Logstash Reference/docs/7.x: 1df4197ba14f08f6769f84a46e400520df3f2133
-  Logstash Reference/docs/master: 7f6f9e66c149c9bf5339ded125291959097e52d1
+  Logstash Reference/docs/master: local
   Logstash Versioned Plugin Reference/docs/versioned-plugins/versioned_plugin_docs: 3894a807366476b7eb52294eb020223e0d9cee90
 observability-docs:
   Fleet Developer Guide/docs/en/master: 5b1a9e9a9eee8d054ee243dbfbcd61a63b097908
