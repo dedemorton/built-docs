@@ -226,7 +226,7 @@ the files cannot be made available.
 </dt>
 <dd>
 <p>
-A list of action types that are enabled. It defaults to <code class="literal">[*]</code>, enabling all types. The names for built-in Kibana action types are prefixed with a <code class="literal">.</code> and include: <code class="literal">.server-log</code>, <code class="literal">.slack</code>, <code class="literal">.email</code>, <code class="literal">.index</code>, <code class="literal">.pagerduty</code>, and <code class="literal">.webhook</code>. An empty list <code class="literal">[]</code> will disable all action types.
+A list of action types that are enabled. It defaults to <code class="literal">[*]</code>, enabling all types. The names for built-in Kibana action types are prefixed with a <code class="literal">.</code> and include: <code class="literal">.server-log</code>, <code class="literal">.slack</code>, <code class="literal">.email</code>, <code class="literal">.index</code>, <code class="literal">.pagerduty</code>, <code class="literal">.webhook</code>,<em>.jira</em>,<em>.swimlane</em>,<em>.servicenow</em>,<em>.servicenow-sir</em>,<em>.resilient</em> and <code class="literal">.teams</code>.. An empty list <code class="literal">[]</code> will disable all action types.
 </p>
 <p>Disabled action types will not appear as an option when creating new connectors, but existing connectors and actions of that type will remain in Kibana and will not function.</p>
 </dd>
