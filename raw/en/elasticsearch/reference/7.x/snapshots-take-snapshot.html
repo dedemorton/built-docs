@@ -111,7 +111,7 @@ regardless of whether those system indices are named in the <code class="literal
 of the request. You can also use the create snapshot
 API&#8217;s <a class="xref" href="create-snapshot-api.html#create-snapshot-api-feature-states"><code class="literal">feature_states</code></a> parameter to
 include only a subset of system indices in the snapshot. Snapshots do not
-store transient settings or registered snapshot repositories.</p>
+store the deprecated transient settings or registered snapshot repositories.</p>
 <p>While a snapshot of a particular shard is being created, the shard cannot be
 moved to another node, which can interfere with rebalancing and allocation
 filtering. Elasticsearch can only move the shard to another node (according to the current

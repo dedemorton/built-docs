@@ -55,22 +55,13 @@ Not what you want? See the
 </div></div></div>
 <p>At least one setting to be updated must be provided:</p>
 <div class="pre_wrapper lang-java">
-<pre class="programlisting prettyprint lang-java">request.transientSettings(transientSettings); <a id="CO566-1"></a><i class="conum" data-value="1"></i>
-request.persistentSettings(persistentSettings); <a id="CO566-2"></a><i class="conum" data-value="2"></i></pre>
+<pre class="programlisting prettyprint lang-java">request.persistentSettings(persistentSettings); <a id="CO566-1"></a><i class="conum" data-value="1"></i></pre>
 </div>
 <div class="calloutlist">
 <table border="0" summary="Callout list">
 <tr>
 <td align="left" valign="top" width="5%">
 <p><a href="#CO566-1"><i class="conum" data-value="1"></i></a></p>
-</td>
-<td align="left" valign="top">
-<p>Sets the transient settings to be applied</p>
-</td>
-</tr>
-<tr>
-<td align="left" valign="top" width="5%">
-<p><a href="#CO566-2"><i class="conum" data-value="2"></i></a></p>
 </td>
 <td align="left" valign="top">
 <p>Sets the persistent setting to be applied</p>
@@ -86,22 +77,13 @@ request.persistentSettings(persistentSettings); <a id="CO566-2"></a><i class="co
 </div></div></div>
 <p>The settings to be applied can be provided in different ways:</p>
 <div class="pre_wrapper lang-java">
-<pre class="programlisting prettyprint lang-java">String transientSettingKey =
+<pre class="programlisting prettyprint lang-java">String persistentSettingKey =
         RecoverySettings.INDICES_RECOVERY_MAX_BYTES_PER_SEC_SETTING.getKey();
-int transientSettingValue = 10;
-Settings transientSettings =
-        Settings.builder()
-        .put(transientSettingKey, transientSettingValue, ByteSizeUnit.BYTES)
-        .build(); <a id="CO567-1"></a><i class="conum" data-value="1"></i>
-
-String persistentSettingKey =
-        EnableAllocationDecider.CLUSTER_ROUTING_ALLOCATION_ENABLE_SETTING.getKey();
-String persistentSettingValue =
-        EnableAllocationDecider.Allocation.NONE.name();
+int persistentSettingValue = 10;
 Settings persistentSettings =
         Settings.builder()
-        .put(persistentSettingKey, persistentSettingValue)
-        .build(); <a id="CO567-2"></a><i class="conum" data-value="2"></i></pre>
+        .put(persistentSettingKey, persistentSettingValue, ByteSizeUnit.BYTES)
+        .build(); <a id="CO567-1"></a><i class="conum" data-value="1"></i></pre>
 </div>
 <div class="calloutlist">
 <table border="0" summary="Callout list">
@@ -110,24 +92,16 @@ Settings persistentSettings =
 <p><a href="#CO567-1"><i class="conum" data-value="1"></i></a></p>
 </td>
 <td align="left" valign="top">
-<p>Creates a transient setting as <code class="literal">Settings</code></p>
-</td>
-</tr>
-<tr>
-<td align="left" valign="top" width="5%">
-<p><a href="#CO567-2"><i class="conum" data-value="2"></i></a></p>
-</td>
-<td align="left" valign="top">
 <p>Creates a persistent setting as <code class="literal">Settings</code></p>
 </td>
 </tr>
 </table>
 </div>
 <div class="pre_wrapper lang-java">
-<pre class="programlisting prettyprint lang-java">Settings.Builder transientSettingsBuilder =
+<pre class="programlisting prettyprint lang-java">Settings.Builder persistentSettingsBuilder =
         Settings.builder()
-        .put(transientSettingKey, transientSettingValue, ByteSizeUnit.BYTES);
-request.transientSettings(transientSettingsBuilder); <a id="CO568-1"></a><i class="conum" data-value="1"></i></pre>
+        .put(persistentSettingKey, persistentSettingValue, ByteSizeUnit.BYTES);
+request.persistentSettings(persistentSettingsBuilder); <a id="CO568-1"></a><i class="conum" data-value="1"></i></pre>
 </div>
 <div class="calloutlist">
 <table border="0" summary="Callout list">
@@ -142,7 +116,7 @@ request.transientSettings(transientSettingsBuilder); <a id="CO568-1"></a><i clas
 </table>
 </div>
 <div class="pre_wrapper lang-java">
-<pre class="programlisting prettyprint lang-java">request.transientSettings(
+<pre class="programlisting prettyprint lang-java">request.persistentSettings(
         "{\"indices.recovery.max_bytes_per_sec\": \"10b\"}"
         , XContentType.JSON); <a id="CO569-1"></a><i class="conum" data-value="1"></i></pre>
 </div>
@@ -160,9 +134,9 @@ request.transientSettings(transientSettingsBuilder); <a id="CO568-1"></a><i clas
 </div>
 <div class="pre_wrapper lang-java">
 <pre class="programlisting prettyprint lang-java">Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
-map.put(transientSettingKey
-        , transientSettingValue + ByteSizeUnit.BYTES.getSuffix());
-request.transientSettings(map); <a id="CO570-1"></a><i class="conum" data-value="1"></i></pre>
+map.put(persistentSettingKey
+        , persistentSettingValue + ByteSizeUnit.BYTES.getSuffix());
+request.persistentSettings(map); <a id="CO570-1"></a><i class="conum" data-value="1"></i></pre>
 </div>
 <div class="calloutlist">
 <table border="0" summary="Callout list">
@@ -327,8 +301,7 @@ synchronous execution case.</p>
 executed operation as follows:</p>
 <div class="pre_wrapper lang-java">
 <pre class="programlisting prettyprint lang-java">boolean acknowledged = response.isAcknowledged(); <a id="CO575-1"></a><i class="conum" data-value="1"></i>
-Settings transientSettingsResponse = response.getTransientSettings(); <a id="CO575-2"></a><i class="conum" data-value="2"></i>
-Settings persistentSettingsResponse = response.getPersistentSettings(); <a id="CO575-3"></a><i class="conum" data-value="3"></i></pre>
+Settings persistentSettingsResponse = response.getPersistentSettings(); <a id="CO575-2"></a><i class="conum" data-value="2"></i></pre>
 </div>
 <div class="calloutlist">
 <table border="0" summary="Callout list">
@@ -343,14 +316,6 @@ Settings persistentSettingsResponse = response.getPersistentSettings(); <a id="C
 <tr>
 <td align="left" valign="top" width="5%">
 <p><a href="#CO575-2"><i class="conum" data-value="2"></i></a></p>
-</td>
-<td align="left" valign="top">
-<p>Indicates which transient settings have been applied</p>
-</td>
-</tr>
-<tr>
-<td align="left" valign="top" width="5%">
-<p><a href="#CO575-3"><i class="conum" data-value="3"></i></a></p>
 </td>
 <td align="left" valign="top">
 <p>Indicates which persistent settings have been applied</p>
