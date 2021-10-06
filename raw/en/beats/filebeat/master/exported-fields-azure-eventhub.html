@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>azure-eventhub fields | Filebeat Reference [master] | Elastic</title>
+<link rel="home" href="index.html" title="Filebeat Reference [master]"/>
+<link rel="up" href="exported-fields.html" title="Exported fields"/>
+<link rel="prev" href="exported-fields-azure.html" title="Azure fields"/>
+<link rel="next" href="exported-fields-barracuda.html" title="Barracuda Web Application Firewall fields"/>
+<meta name="DC.type" content="Learn/Docs/Filebeat/Reference/master"/>
+<meta name="DC.subject" content="Filebeat"/>
+<meta name="DC.identifier" content="master"/>
+</head>
+<body><div class="page_header">
+You are looking at preliminary documentation for a future release.
+Not what you want? See the
+<a href="../current/index.html">current release documentation</a>.
+</div>
+<div id="content">
+<div class="breadcrumbs">
+<span class="breadcrumb-link"><a href="index.html">Filebeat Reference [master]</a></span>
+»
+<span class="breadcrumb-link"><a href="exported-fields.html">Exported fields</a></span>
+»
+<span class="breadcrumb-node">azure-eventhub fields</span>
+</div>
+<div class="navheader">
+<span class="prev">
+<a href="exported-fields-azure.html">« Azure fields</a>
+</span>
+<span class="next">
+<a href="exported-fields-barracuda.html">Barracuda Web Application Firewall fields »</a>
+</span>
+</div>
+<div class="chapter">
+<div class="titlepage"><div><div>
+<h2 class="title"><a id="exported-fields-azure-eventhub"></a>azure-eventhub fields<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/beats/edit/master/filebeat/docs/fields.asciidoc">edit</a></h2>
+</div></div></div>
+<p>Fields regarding the Azure event hub information.</p>
+<h3><a id="_azure_eventhub"></a>azure-eventhub<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/beats/edit/master/filebeat/docs/fields.asciidoc">edit</a></h3>
+<p>Fields regarding the Azure event hub information.</p>
+<div class="variablelist">
+<dl class="variablelist">
+<dt>
+<span class="term">
+<span class="strong strong"><strong><code class="literal">azure-eventhub.offset</code></strong></span>
+</span>
+</dt>
+<dd>
+<p>The position of an event within a partition.</p>
+<p>type: long</p>
+</dd>
+<dt>
+<span class="term">
+<span class="strong strong"><strong><code class="literal">azure-eventhub.sequence_number</code></strong></span>
+</span>
+</dt>
+<dd>
+<p>The logical sequence number of the event within the partition stream of the event hub.</p>
+<p>type: long</p>
+</dd>
+<dt>
+<span class="term">
+<span class="strong strong"><strong><code class="literal">azure-eventhub.enqueued_time</code></strong></span>
+</span>
+</dt>
+<dd>
+<p>The date and time, in UTC, of when the event was enqueued in the event hub partition.</p>
+<p>type: date</p>
+</dd>
+<dt>
+<span class="term">
+<span class="strong strong"><strong><code class="literal">azure-eventhub.eventhub</code></strong></span>
+</span>
+</dt>
+<dd>
+<p>The name of the event hub instance.</p>
+<p>type: keyword</p>
+</dd>
+<dt>
+<span class="term">
+<span class="strong strong"><strong><code class="literal">azure-eventhub.consumer_group</code></strong></span>
+</span>
+</dt>
+<dd>
+<p>The view (state, position, or offset) of an entire event hub.</p>
+<p>type: keyword</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="navfooter">
+<span class="prev">
+<a href="exported-fields-azure.html">« Azure fields</a>
+</span>
+<span class="next">
+<a href="exported-fields-barracuda.html">Barracuda Web Application Firewall fields »</a>
+</span>
+</div>
+</div>
+</body>
+</html>
