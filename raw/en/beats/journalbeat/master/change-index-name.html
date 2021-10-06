@@ -61,7 +61,7 @@ setup.template.pattern: "customname-*"</pre>
 <div class="warning admon">
 <div class="icon"></div>
 <div class="admon_content">
-<p>If <a class="xref" href="ilm.html" title="Configure index lifecycle management">index lifecycle management</a> is enabled (which is typically the default), <code class="literal">setup.template.name</code> and <code class="literal">setup.template.pattern</code> are ignored.</p>
+<p>If <a class="xref" href="ilm.html" title="Configure index lifecycle management">index lifecycle management</a> is enabled (which is typically the default), <code class="literal">setup.template.name</code> and <code class="literal">setup.template.pattern</code> are ignored. Thus you must also set setup.ilm.enabled: false to disable index lifecycle management.</p>
 </div>
 </div>
 <p>For a full list of template setup options, see <a class="xref" href="configuration-template.html" title="Configure Elasticsearch index template loading"><em>Elasticsearch index template</em></a>.</p>
