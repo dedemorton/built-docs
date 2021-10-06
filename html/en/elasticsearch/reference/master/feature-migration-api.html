@@ -3,7 +3,7 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Feature Upgrade APIs | Elasticsearch Guide [master] | Elastic</title>
+<title>Feature migration APIs | Elasticsearch Guide [master] | Elastic</title>
 <link rel="home" href="index.html" title="Elasticsearch Guide [master]"/>
 <link rel="up" href="migration-api.html" title="Migration APIs"/>
 <link rel="prev" href="migration-api-deprecation.html" title="Deprecation info APIs"/>
@@ -120,7 +120,7 @@ Not what you want? See the
 »
 <span class="breadcrumb-link"><a href="migration-api.html">Migration APIs</a></span>
 »
-<span class="breadcrumb-node">Feature Upgrade APIs</span>
+<span class="breadcrumb-node">Feature migration APIs</span>
 </div>
 <div class="navheader">
 <span class="prev">
@@ -132,37 +132,40 @@ Not what you want? See the
 </div>
 <div class="section xpack">
 <div class="titlepage"><div><div>
-<h2 class="title"><a id="migration-api-feature-upgrade"></a>Feature Upgrade APIs<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h2>
+<h2 class="title"><a id="feature-migration-api"></a>Feature migration APIs<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h2>
 </div></div></div>
 
+<p>Version upgrades sometimes require changes to how features
+store configuration information and data in system indices.
+The feature migration APIs enable you to see what features require changes,
+initiate the automatic migration process, and check migration status.</p>
+<p>Some functionality might be temporarily unavailable
+during the migration process.</p>
 <div class="important admon">
 <div class="icon"></div>
 <div class="admon_content">
-<p>Use this API to check for system features that need to be upgraded before
-a major version upgrade. You should run it on the last minor version of the
-major version you are upgrading from.</p>
+<p>Verify that all necessary migrations are complete before upgrading.
+When upgrading to 8.0, first perform a rolling upgrade to 7.16 so you can
+use the Kibana Upgrade Assistant or call this API directly.</p>
 </div>
 </div>
-<p>The feature upgrade APIs are to be used to retrieve information about system features
-that have to be upgraded before a cluster can be migrated to the next major version number,
-and to trigger an automated system upgrade that might potentially involve downtime for
-Elasticsearch system features.</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="feature-upgrade-api-request"></a>Request<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
+<h3 class="title"><a id="feature-migration-api-request"></a>Request<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
 </div></div></div>
-<p><code class="literal">GET /migration/system_features</code></p>
+<p><code class="literal">GET /migration/system_features</code>
+<code class="literal">POST /migration/system_features</code></p>
 </div>
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="feature-upgrade-api-prereqs"></a>Prerequisites<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
+<h3 class="title"><a id="feature-migration-api-prereqs"></a>Prerequisites<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
 If the Elasticsearch security features are enabled, you must have the <code class="literal">manage</code>
-<a class="xref" href="security-privileges.html#privileges-list-cluster" title="Cluster privileges">cluster privilege</a> to use this API. (TODO: true?)
+<a class="xref" href="security-privileges.html#privileges-list-cluster" title="Cluster privileges">cluster privilege</a> to use this API.
 </li>
 </ul>
 </div>
@@ -170,22 +173,31 @@ If the Elasticsearch security features are enabled, you must have the <code clas
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="feature-upgrade-api-example"></a>Examples<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
+<h3 class="title"><a id="feature-migration-api-desc"></a>Description<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
 </div></div></div>
-<p>To see the list of system features needing upgrades, submit a GET request to the
-<code class="literal">_migration/system_features</code> endpoint:</p>
+<p>Submit a GET request to the <code class="literal">_migration/system_features</code> endpoint to see what features
+need to be migrated and the status of any migrations that are in progress.
+Submit a POST request to the endpoint to start the migration process.</p>
+</div>
+
+<div class="section">
+<div class="titlepage"><div><div>
+<h3 class="title"><a id="feature-migration-api-example"></a>Examples<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/migration/apis/feature_upgrade.asciidoc">edit</a></h3>
+</div></div></div>
+<p>When you submit a GET request to the <code class="literal">_migration/system_features</code> endpoint,
+the response indicates the status of any features that need to be migrated.</p>
 <a id="85e2719d9fd6d2c2d47d28d39f2e3f7e"></a>
 <div class="pre_wrapper lang-console">
 <pre class="programlisting prettyprint lang-console">GET /_migration/system_features</pre>
 </div>
 <div class="console_widget" data-snippet="snippets/2328.console"></div>
 <p>Example response:</p>
-<a id="9dd99d9c11e9e1477021fdd52226d27a"></a>
+<a id="d09e8139a48653a50473230707b105ad"></a>
 <div class="pre_wrapper lang-console-result">
 <pre class="programlisting prettyprint lang-console-result">{
   "features" : [
     {
-      "feature_name" : "security",
+      "feature_name" : "security", <a id="CO646-1"></a><i class="conum" data-value="1"></i>
       "minimum_index_version" : "7.1.1",
       "upgrade_status" : "UPGRADE_NEEDED",
       "indices" : [
@@ -199,28 +211,51 @@ If the Elasticsearch security features are enabled, you must have the <code clas
   "upgrade_status" : "UPGRADE_NEEDED"
 }</pre>
 </div>
-<p>This response tells us that Elasticsearch security needs its internal
-indices upgraded before we can upgrade the cluster to 8.0.</p>
-<p>To perform the required upgrade, submit a POST request to the same endpoint.</p>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO646-1"><i class="conum" data-value="1"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>Elasticsearch Security needs to be migrated before the cluster is upgraded to 8.0.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>When you submit a POST request to the <code class="literal">_migration/system_features</code> endpoint
+to start the migration process,
+the response indicates what features will be migrated.</p>
 <a id="008ed823c89e703c447ac89c6b689833"></a>
 <div class="pre_wrapper lang-console">
 <pre class="programlisting prettyprint lang-console">POST /_migration/system_features</pre>
 </div>
 <div class="console_widget" data-snippet="snippets/2329.console"></div>
 <p>Example response:</p>
-<a id="0a098d4db7868156843f72a192f1c47d"></a>
+<a id="daa6c928819a3ba77b9ffb9987f8c919"></a>
 <div class="pre_wrapper lang-console-result">
 <pre class="programlisting prettyprint lang-console-result">{
   "accepted" : true,
   "features" : [
     {
-      "feature_name" : "security"
+      "feature_name" : "security" <a id="CO647-1"></a><i class="conum" data-value="1"></i>
     }
   ]
 }</pre>
 </div>
-<p>This tells us that the security index is being upgraded. To check the
-overall status of the upgrade, call the endpoint with GET.</p>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+<tr>
+<td align="left" valign="top" width="5%">
+<p><a href="#CO647-1"><i class="conum" data-value="1"></i></a></p>
+</td>
+<td align="left" valign="top">
+<p>Elasticsearch Security will be migrated before the cluster is upgraded to 8.0.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>Subsequent GET requests will return the status of the migration process.</p>
 </div>
 
 </div>
