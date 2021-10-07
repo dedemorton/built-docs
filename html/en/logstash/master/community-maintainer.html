@@ -159,7 +159,7 @@ before a patch can be reviewed. Contributors can add themselves to the plugin Co
 reviewing and merging patches.</p>
 <h4><a id="_patch_requirements"></a>Patch Requirements<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/logstash/edit/master/docs/static/maintainer-guide.asciidoc">edit</a></h4>
 <p>A patch is a minimal and accurate answer to exactly one identified and agreed upon problem. It must conform to the
-<a href="https://github.com/elastic/logstash/blob/master/STYLE.md" class="ulink" target="_top">code style guidelines</a> and must include RSpec tests that verify
+<a href="https://github.com/elastic/logstash/blob/main/STYLE.md" class="ulink" target="_top">code style guidelines</a> and must include RSpec tests that verify
 the fitness of the solution.</p>
 <p>A patch will be automatically tested by a CI system that will report on the Pull Request status.</p>
 <p>A patch CLA will be automatically verified and reported on the Pull Request status.</p>
@@ -180,7 +180,7 @@ Maintainers or core team for an extended period (more than 2 weeks).</p>
 <p>Maintainers should involve the core team if help is needed to reach consensus.</p>
 <p>Review non-source changes such as documentation in the same way as source code changes.</p>
 <h4><a id="_branch_management"></a>Branch Management<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/logstash/edit/master/docs/static/maintainer-guide.asciidoc">edit</a></h4>
-<p>The plugin has a master branch that always holds the latest in-progress version and should always build.  Topic branches
+<p>The plugin has a main branch that always holds the latest in-progress version and should always build.  Topic branches
 should kept to the minimum.</p>
 <h4><a id="_changelog_management"></a>Changelog Management<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/logstash/edit/master/docs/static/maintainer-guide.asciidoc">edit</a></h4>
 <p>Every plugin should have a changelog (CHANGELOG.md).  If not, please create one.  When changes are made to a plugin, make sure to include a changelog entry under the respective version to document the change.  The changelog should be easily understood from a user point of view.  As we iterate and release plugins rapidly, users use the changelog as a mechanism for deciding whether to update.</p>
@@ -191,7 +191,7 @@ should kept to the minimum.</p>
 </div>
 <h5><a id="_detailed_format_of_changelog_md"></a>Detailed format of CHANGELOG.md<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/logstash/edit/master/docs/static/maintainer-guide.asciidoc">edit</a></h5>
 <p>Sharing a similar format of CHANGELOG.md in plugins ease readability for users.
-Please see following annotated example and see a concrete example in <a href="https://raw.githubusercontent.com/logstash-plugins/logstash-filter-date/master/CHANGELOG.md" class="ulink" target="_top">logstash-filter-date</a>.</p>
+Please see following annotated example and see a concrete example in <a href="https://raw.githubusercontent.com/logstash-plugins/logstash-filter-date/main/CHANGELOG.md" class="ulink" target="_top">logstash-filter-date</a>.</p>
 <div class="pre_wrapper lang-markdown">
 <pre class="programlisting prettyprint lang-markdown">## 1.0.x                              <a id="CO42-1"></a><i class="conum" data-value="1"></i>
  - change description                 <a id="CO42-2"></a><i class="conum" data-value="2"></i>
