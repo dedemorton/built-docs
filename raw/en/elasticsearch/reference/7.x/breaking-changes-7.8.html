@@ -231,6 +231,22 @@ Assign users with the <code class="literal">kibana_user</code> role to the <code
 Discontinue use of the <code class="literal">kibana_user</code> role.</p>
 </div>
 </details>
+<h3><a id="breaking_78_cluster_coordination_changes"></a>Cluster coordination changes<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/7.x/docs/reference/migration/migrate_7_8.asciidoc">edit</a></h3>
+<details>
+<summary class="title">The old form of the <a class="xref" href="voting-config-exclusions.html" title="Voting configuration exclusions API">Voting configuration exclusions</a> API is deprecated.</summary>
+<div class="content">
+<p><span class="strong strong"><strong>Details</strong></span><br>
+In earlier versions you would add a voting config exclusion by specifying the
+node names in the path: <code class="literal">POST /_cluster/voting_config_exclusions/{node_name}</code>.
+In 7.8.0 the preferred form of the API now specifies the node names or ids as a
+query parameter: <code class="literal">POST /_cluster/voting_config_exclusions?node_ids=...</code> or
+<code class="literal">POST /_cluster/voting_config_exclusions?node_names=...</code>. The older API is now
+deprecated.</p>
+<p><span class="strong strong"><strong>Impact</strong></span><br>
+Discontinue use of the older API, and specify the excluded nodes in the query
+parameters instead.</p>
+</div>
+</details>
 </div>
 <div class="navfooter">
 <span class="prev">
