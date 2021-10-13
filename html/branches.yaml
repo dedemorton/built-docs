@@ -3543,7 +3543,7 @@ ecs-logging-python:
 ecs-logging-ruby:
   ECS Logging Ruby Reference/docs/master: 0f3d16c3e781a37a84f60a60f255fe2cc8c1cb2a
 eland:
-  eland/docs/guide/main: 6088f2e39dd20424df964d9601780d6320221b88
+  eland/docs/guide/main: local
 elasticsearch:
   Community Contributed Clients/docs/community-clients/master: 631e06698302793d3016c146a4b47b911f82e90d
   Elasticsearch Guide/build-tools-internal/7.14: 209b262f67146e26d83e88bbfa4896d4b087421e
