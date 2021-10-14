@@ -204,8 +204,6 @@ Not what you want? See the
 </tr>
 </table>
 </div>
-<p>By default, the <code class="literal">terms</code> aggregation will return the buckets for the top ten terms ordered by the <code class="literal">doc_count</code>. One can
-change this default behaviour by setting the <code class="literal">size</code> parameter.</p>
 <p><a id="search-aggregations-bucket-terms-aggregation-types"></a>The <code class="literal">field</code> can be <a class="xref" href="keyword.html" title="Keyword type family">Keyword</a>, <a class="xref" href="number.html" title="Numeric field types">Numeric</a>, <a class="xref" href="ip.html" title="IP field type"><code class="literal">ip</code></a>, <a class="xref" href="boolean.html" title="Boolean field type"><code class="literal">boolean</code></a>,
 or <a class="xref" href="binary.html" title="Binary field type"><code class="literal">binary</code></a>.</p>
 <div class="note admon">
@@ -222,35 +220,41 @@ memory usage.</p>
 <div class="titlepage"><div><div>
 <h3 class="title"><a id="search-aggregations-bucket-terms-aggregation-size"></a>Size<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/aggregations/bucket/terms-aggregation.asciidoc">edit</a></h3>
 </div></div></div>
-<p>The <code class="literal">size</code> parameter can be set to define how many term buckets should be returned out of the overall terms list. By
-default, the node coordinating the search process will request each shard to provide its own top <code class="literal">size</code> term buckets
-and once all shards respond, it will reduce the results to the final list that will then be returned to the client.
-This means that if the number of unique terms is greater than <code class="literal">size</code>, the returned list is slightly off and not accurate
-(it could be that the term counts are slightly off and it could even be that a term that should have been in the top
-size buckets was not returned).</p>
-<div class="note admon">
-<div class="icon"></div>
-<div class="admon_content">
-<p>If you want to retrieve <span class="strong strong"><strong>all</strong></span> terms or all combinations of terms in a nested <code class="literal">terms</code> aggregation
-      you should use the <a class="xref" href="search-aggregations-bucket-composite-aggregation.html" title="Composite aggregation">Composite</a> aggregation which
-      allows to paginate over all possible terms rather than setting a size greater than the cardinality of the field in the
-      <code class="literal">terms</code> aggregation. The <code class="literal">terms</code> aggregation is meant to return the <code class="literal">top</code> terms and does not allow pagination.</p>
-</div>
-</div>
+<p>By default the <code class="literal">terms</code> agg returns the ten buckets with the most documents but
+you can change that count the <code class="literal">size</code> parameter to return more buckets up to
+<a class="xref" href="search-settings.html#search-settings-max-buckets">max_buckets</a> which defaults to 65,536. So if
+there aren&#8217;t many unique terms it quite viable to return all of them with the
+<code class="literal">terms</code> aggregation. Read on about sorting if you are fine picking the "best"
+terms or have a look at the
+<a class="xref" href="search-aggregations-bucket-composite-aggregation.html" title="Composite aggregation">Composite</a> aggregation if
+you&#8217;d like to be able to page through all terms.</p>
 </div>
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_shard_size_3"></a>Shard Size<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/aggregations/bucket/terms-aggregation.asciidoc">edit</a></h3>
+<h3 class="title"><a id="search-aggregations-bucket-terms-aggregation-shard-size"></a>Shard Size<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/aggregations/bucket/terms-aggregation.asciidoc">edit</a></h3>
 </div></div></div>
-<p>The higher the requested <code class="literal">size</code> is, the more accurate the results will be, but also, the more expensive it will be to
-compute the final results (both due to bigger priority queues that are managed on a shard level and due to bigger data
-transfers between the nodes and the client).</p>
-<p>The <code class="literal">shard_size</code> parameter can be used to minimize the extra work that comes with bigger requested <code class="literal">size</code>. When defined,
-it will determine how many terms the coordinating node will request from each shard. Once all the shards responded, the
-coordinating node will then reduce them to a final result which will be based on the <code class="literal">size</code> parameter - this way,
-one can increase the accuracy of the returned terms and avoid the overhead of streaming a big list of buckets back to
-the client.</p>
+<p>It&#8217;d be reasonable to assume that <code class="literal">terms</code> picks the top terms by asking each
+shard to pick the top <code class="literal">size</code> terms and return them then we&#8217;d just combine them.
+But what if there&#8217;s a bucket that has many documents on one shard but is just
+outside the <code class="literal">size</code> on all the others? If each shard only returned <code class="literal">size</code> buckets
+then we&#8217;d only return part of the bucket. Which&#8217;d be pretty terrible.</p>
+<p>We try to avoid this problem by having each shard return <code class="literal">shard_size</code> buckets
+which defaults to <code class="literal">(size * 1.5 + 10)</code>. So, for a <code class="literal">terms</code> agg with the default
+size of <code class="literal">10</code> each shard will return the top <code class="literal">25</code> buckets. This helps, but
+it&#8217;s still quite possible to return partial buckets, it just takes buckets with
+more disparate per-shard sizes.</p>
+<p>You can absolutely bump <code class="literal">shard_size</code> when you need to increase the accuracy of
+the selection of top buckets. It is much cheaper to increase the <code class="literal">shard_size</code>
+than it is to increase the <code class="literal">size</code>. It still takes more bytes over the wire and
+waiting in memory on the coordinating node. But do it if you need it.</p>
+<div class="important admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>See the note in <a class="xref" href="search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-order" title="Order">Order</a>
+           if you are sorting by anything other than document count.</p>
+</div>
+</div>
 <div class="note admon">
 <div class="icon"></div>
 <div class="admon_content">
@@ -258,48 +262,33 @@ the client.</p>
         override it and reset it to be equal to <code class="literal">size</code>.</p>
 </div>
 </div>
-<p>The default <code class="literal">shard_size</code> is <code class="literal">(size * 1.5 + 10)</code>.</p>
 </div>
 
 <div class="section">
 <div class="titlepage"><div><div>
 <h3 class="title"><a id="terms-agg-doc-count-error"></a>Document count error<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/aggregations/bucket/terms-aggregation.asciidoc">edit</a></h3>
 </div></div></div>
-<p><code class="literal">doc_count</code> values for a <code class="literal">terms</code> aggregation may be approximate. As a result,
-any sub-aggregations on the <code class="literal">terms</code> aggregation may also be approximate.</p>
-<p>To calculate <code class="literal">doc_count</code> values, each shard provides its own top terms and
-document counts. The aggregation combines these shard-level results to calculate
-its final <code class="literal">doc_count</code> values. To measure the accuracy of <code class="literal">doc_count</code> values, the
-aggregation results include the following properties:</p>
-<div class="variablelist">
-<dl class="variablelist">
-<dt>
-<span class="term">
-<code class="literal">sum_other_doc_count</code>
-</span>
-</dt>
-<dd>
-(integer) The total document count for any terms not included in the results.
-</dd>
-<dt>
-<span class="term">
-<code class="literal">doc_count_error_upper_bound</code>
-</span>
-</dt>
-<dd>
-(integer) The highest possible document count for any single term not included
-in the results. If <code class="literal">0</code>, <code class="literal">doc_count</code> values are accurate.
-</dd>
-</dl>
-</div>
+<p><code class="literal">sum_other_doc_count</code> is the number of documents that didn&#8217;t make it into the
+the top <code class="literal">size</code> buckets. If this is greater than <code class="literal">0</code> you can be sure that the
+<code class="literal">terms</code> agg had to throw away some buckets, either because they didn&#8217;t fit into
+<code class="literal">size</code> on the coordinating node or they didn&#8217;t fit into <code class="literal">shard_size</code> on the
+data node.</p>
 </div>
 
 <div class="section">
 <div class="titlepage"><div><div>
 <h3 class="title"><a id="_per_bucket_document_count_error"></a>Per bucket document count error<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/aggregations/bucket/terms-aggregation.asciidoc">edit</a></h3>
 </div></div></div>
-<p>To get the <code class="literal">doc_count_error_upper_bound</code> for each term, set
-<code class="literal">show_term_doc_count_error</code> to <code class="literal">true</code>:</p>
+<p>If you set the <code class="literal">show_term_doc_count_error</code> parameter to <code class="literal">true</code> the <code class="literal">terms</code>
+aggregation will include <code class="literal">doc_count_error_upper_bound</code> which is an upper bound
+to the error on the <code class="literal">doc_count</code> returned by each shard. It&#8217;s pretty much the
+sum of the size of the largest bucket on each shard that didn&#8217;t fit into
+<code class="literal">shard_size</code>.</p>
+<p>In more concrete terms, imagine there is one bucket that is very large on one
+shard and just outside the <code class="literal">shard_size</code> on all the other shards. In that case
+the <code class="literal">terms</code> agg will return the bucket because it is large, but it&#8217;ll be missing
+data from many documents on the shards where it didn&#8217;t make the cut.
+<code class="literal">doc_count_error_upper_bound</code> is the maximum number of missing documents.</p>
 <div class="pre_wrapper lang-ruby alternative">
 <pre class="programlisting prettyprint lang-ruby alternative">response = client.search(
   body: {
@@ -349,9 +338,6 @@ fmt.Println(res, err)</pre>
 }</pre>
 </div>
 <div class="console_widget has-ruby has-go" data-snippet="snippets/1186.console"></div>
-<p>This shows an error value for each term returned by the aggregation which represents the <em>worst case</em> error in the document count
-and can be useful when deciding on a value for the <code class="literal">shard_size</code> parameter. This is calculated by summing the document counts for
-the last term returned by all shards which did not return the term.</p>
 <p>These errors can only be calculated in this way when the terms are ordered by descending document count. When the aggregation is
 ordered by the terms values themselves (either ascending or descending) there is no error in the document count since if a shard
 does not return a particular term which appears in the results from another shard, it must not have that term in its index. When the
@@ -363,22 +349,24 @@ determined and is given a value of -1 to indicate this.</p>
 <div class="titlepage"><div><div>
 <h3 class="title"><a id="search-aggregations-bucket-terms-aggregation-order"></a>Order<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/aggregations/bucket/terms-aggregation.asciidoc">edit</a></h3>
 </div></div></div>
-<p>The order of the buckets can be customized by setting the <code class="literal">order</code> parameter. By default, the buckets are ordered by
-their <code class="literal">doc_count</code> descending. It is possible to change this behaviour as documented below:</p>
+<p>By default, the buckets are ordered by their <code class="literal">doc_count</code> descending but you can
+order by the term itself (<code class="literal">_key</code>) or to the value of a sub-aggregation. And you
+can flip from descending to ascending order.</p>
 <div class="warning admon">
 <div class="icon"></div>
 <div class="admon_content">
-<p>Sorting by ascending <code class="literal">_count</code> or by sub aggregation is discouraged as it increases the
-<a class="xref" href="search-aggregations-bucket-terms-aggregation.html#terms-agg-doc-count-error" title="Document count error">error</a> on document counts.
-It is fine when a single shard is queried, or when the field that is being aggregated was used
-as a routing key at index time: in these cases results will be accurate since shards have disjoint
-values. However otherwise, errors are unbounded. One particular case that could still be useful
-is sorting by <a class="xref" href="search-aggregations-metrics-min-aggregation.html" title="Min aggregation"><code class="literal">min</code></a> or
-<a class="xref" href="search-aggregations-metrics-max-aggregation.html" title="Max aggregation"><code class="literal">max</code></a> aggregation: counts will not be accurate
-but at least the top buckets will be correctly picked.</p>
+<p>Danger! Danger! Remember how the terms agg picks the top
+<a class="xref" href="search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-shard-size" title="Shard Size"><code class="literal">shard_size</code></a>
+buckets on the data node? Well all of that works really well for something like
+doc count descending. A very well for <code class="literal">_key</code> in either direction. But for doc
+count ascending it&#8217;s frankly <span class="strong strong"><strong>terrible</strong></span>. That basically throws out all of the
+buckets with the most data on every shard. It&#8217;s likely that a bucket with few
+documents on one shard could have more on another but that it wouldn&#8217;t fit into
+<code class="literal">shard_size</code>. This is so bad that we&#8217;ve created a whole separate
+<a class="xref" href="search-aggregations-bucket-rare-terms-aggregation.html" title="Rare terms aggregation">Rare terms</a> aggregation.</p>
 </div>
 </div>
-<p>Ordering the buckets by their doc <code class="literal">_count</code> in an ascending manner:</p>
+<p>If you really must, this is how you sort on doc count ascending:</p>
 <div class="pre_wrapper lang-ruby alternative">
 <pre class="programlisting prettyprint lang-ruby alternative">response = client.search(
   body: {
@@ -480,6 +468,17 @@ fmt.Println(res, err)</pre>
 }</pre>
 </div>
 <div class="console_widget has-ruby has-go" data-snippet="snippets/1188.console"></div>
+<div class="warning admon">
+<div class="icon"></div>
+<div class="admon_content">
+<p>There is also danger in sorting on the value of a sub-aggregation but
+how much danger depends on what the sub-aggregation is doing. Sorting on, say,
+<code class="literal">max</code> descending is fairly similar to sorting on <code class="literal">doc_count</code> descending and
+fairly safe. Sorting on <code class="literal">max</code> ascending is likely to cause tons of errors for
+the same reason sorting on doc count ascending does. See the warning above for
+more on why that&#8217;s trouble.</p>
+</div>
+</div>
 <p>Ordering the buckets by single value metrics sub-aggregation (identified by the aggregation name):</p>
 <div class="pre_wrapper lang-ruby alternative">
 <pre class="programlisting prettyprint lang-ruby alternative">response = client.search(
