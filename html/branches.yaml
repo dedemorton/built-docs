@@ -12,10 +12,10 @@ apm-agent-dotnet:
   APM .NET Agent/docs/master: b1d3e52bd12e06a36f1b74bc5e296e7e74f03095
 apm-agent-go:
   APM Go Agent/CHANGELOG.asciidoc/1.x: 5517149abbeea3794366550372e3299a28bbf9b4
-  APM Go Agent/CHANGELOG.asciidoc/master: 27abca23207b669b6761c307915141026b68d8d8
+  APM Go Agent/CHANGELOG.asciidoc/master: local
   APM Go Agent/docs/0.5: 6cd2ec7386d7723ea78094e4b46bcbe66c1798b3
   APM Go Agent/docs/1.x: 5517149abbeea3794366550372e3299a28bbf9b4
-  APM Go Agent/docs/master: 27abca23207b669b6761c307915141026b68d8d8
+  APM Go Agent/docs/master: local
 apm-agent-ios:
   APM iOS Agent/CHANGELOG.asciidoc/0.x: d2d49b055c2814e8b78a152c38b1c0b2ed8a6656
   APM iOS Agent/CHANGELOG.asciidoc/main: 53c2b0e4b21f6c085126bcdff1c465d5f337d6b0
