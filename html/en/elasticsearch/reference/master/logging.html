@@ -82,8 +82,9 @@
     </script><div id='ZN_emkP0oSe9Qrn7kF'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
     <!--END WEBSITE FEEDBACK SNIPPET-->
 
+    <!--TESTING-->
     <div id='elastic-nav' style="display:none;"></div>
-    <script src='https://www.elastic.co/elastic-nav.js'></script>
+    <script src='https://elastic-co-dev.app.elstc.co/elastic-nav.js'></script>
 
     <!-- Subnav -->
     <div>
@@ -721,11 +722,11 @@ accepts Log4j 2&#8217;s built-in log levels, from least to most verbose: <code c
 <code class="literal">FATAL</code>, <code class="literal">ERROR</code>, <code class="literal">WARN</code>, <code class="literal">INFO</code>, <code class="literal">DEBUG</code>, and <code class="literal">TRACE</code>. The default log level is
 <code class="literal">INFO</code>. Messages logged at higher verbosity levels (<code class="literal">DEBUG</code> and <code class="literal">TRACE</code>) are
 only intended for expert use.</p>
-<a id="8a0d479f76f971aaf9ced2bb5aec7c9e"></a>
+<a id="73be1f93d789264e5b972ddb5991bc66"></a>
 <div class="pre_wrapper lang-console">
 <pre class="programlisting prettyprint lang-console">PUT /_cluster/settings
 {
-  "transient": {
+  "persistent": {
     "logger.org.elasticsearch.discovery": "DEBUG"
   }
 }</pre>
@@ -862,7 +863,7 @@ appender.rolling.filePattern = ${sys:es.logs.base_path}${sys:file.separator}${sy
 
 
 <div id='elastic-footer'></div>
-<script src='https://www.elastic.co/elastic-footer.js'></script>
+<script src='https://elastic-co-dev.app.elstc.co/elastic-footer.js'></script>
 <!-- Footer Section end-->
 
       </section>

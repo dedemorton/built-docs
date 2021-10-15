@@ -82,8 +82,9 @@
     </script><div id='ZN_emkP0oSe9Qrn7kF'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
     <!--END WEBSITE FEEDBACK SNIPPET-->
 
+    <!--TESTING-->
     <div id='elastic-nav' style="display:none;"></div>
-    <script src='https://www.elastic.co/elastic-nav.js'></script>
+    <script src='https://elastic-co-dev.app.elstc.co/elastic-nav.js'></script>
 
     <!-- Subnav -->
     <div>
@@ -273,20 +274,20 @@ machine that does have connectivity, and then install the template manually.</p>
 </div>
 <p><span class="strong strong"><strong>win:</strong></span></p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">PS &gt; .\functionbeat.exe export template --es.version 7.15.0 | Out-File -Encoding UTF8 functionbeat.template.json</pre>
+<pre class="programlisting prettyprint lang-sh">PS &gt; .\functionbeat.exe export template --es.version 7.15.1 | Out-File -Encoding UTF8 functionbeat.template.json</pre>
 </div>
 <p>To install the template, run:</p>
 <p><span class="strong strong"><strong>mac:</strong></span></p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/_template/functionbeat-7.15.0 -d@functionbeat.template.json</pre>
+<pre class="programlisting prettyprint lang-sh">curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/_template/functionbeat-7.15.1 -d@functionbeat.template.json</pre>
 </div>
 <p><span class="strong strong"><strong>linux:</strong></span></p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/_template/functionbeat-7.15.0 -d@functionbeat.template.json</pre>
+<pre class="programlisting prettyprint lang-sh">curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/_template/functionbeat-7.15.1 -d@functionbeat.template.json</pre>
 </div>
 <p><span class="strong strong"><strong>win:</strong></span></p>
 <div class="pre_wrapper lang-sh">
-<pre class="programlisting prettyprint lang-sh">PS &gt; Invoke-RestMethod -Method Put -ContentType "application/json" -InFile functionbeat.template.json -Uri http://localhost:9200/_template/functionbeat-7.15.0</pre>
+<pre class="programlisting prettyprint lang-sh">PS &gt; Invoke-RestMethod -Method Put -ContentType "application/json" -InFile functionbeat.template.json -Uri http://localhost:9200/_template/functionbeat-7.15.1</pre>
 </div>
 </div>
 <div class="navfooter">
@@ -321,7 +322,7 @@ machine that does have connectivity, and then install the template manually.</p>
 
 
 <div id='elastic-footer'></div>
-<script src='https://www.elastic.co/elastic-footer.js'></script>
+<script src='https://elastic-co-dev.app.elstc.co/elastic-footer.js'></script>
 <!-- Footer Section end-->
 
       </section>
