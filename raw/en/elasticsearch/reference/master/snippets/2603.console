@@ -1,25 +1,15 @@
-POST _transform/simple-kibana-ecomm-pivot/_update
+POST _watcher/watch/my_watch/_execute
 {
-  "source": {
-    "index": "kibana_sample_data_ecommerce",
-    "query": {
-      "term": {
-        "geoip.continent_name": {
-          "value": "Asia"
-        }
-      }
-    }
+  "trigger_data" : {
+     "triggered_time" : "now",
+     "scheduled_time" : "now"
   },
-  "description": "Maximum priced ecommerce data by customer_id in Asia",
-  "dest": {
-    "index": "kibana_sample_data_ecommerce_transform_v2",
-    "pipeline": "add_timestamp_pipeline"
+  "alternative_input" : {
+    "foo" : "bar"
   },
-  "frequency": "15m",
-  "sync": {
-    "time": {
-      "field": "order_date",
-      "delay": "120s"
-    }
-  }
+  "ignore_condition" : true,
+  "action_modes" : {
+    "my-action" : "force_simulate"
+  },
+  "record_execution" : true
 }

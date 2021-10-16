@@ -1,5 +1,7 @@
-PUT index/_doc/1
+GET _cluster/allocation/explain
 {
-  "designation": "spoon",
-  "price": 13
+  "index": "my-index",
+  "shard": 0,
+  "primary": false,
+  "current_node": "my-node"
 }

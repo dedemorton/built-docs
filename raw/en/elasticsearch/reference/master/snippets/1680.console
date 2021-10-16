@@ -1,9 +1,28 @@
-GET index/_search
+PUT bicycles
 {
-  "query": {
-    "simple_query_string": {
-      "fields": [ "body" ],
-      "query": "ski"
+  "mappings": {
+    "properties": {
+      "cycle_type": {
+        "type": "constant_keyword",
+        "value": "bicycle"
+      },
+      "name": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+PUT other_cycles
+{
+  "mappings": {
+    "properties": {
+      "cycle_type": {
+        "type": "keyword"
+      },
+      "name": {
+        "type": "text"
+      }
     }
   }
 }

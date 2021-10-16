@@ -1,1 +1,4 @@
-GET _cat/nodes?v=true&s=cpu:desc
+PUT _settings
+{
+  "index.number_of_replicas": 1
+}

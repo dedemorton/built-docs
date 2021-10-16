@@ -1,4 +1,9 @@
-PUT _settings
+POST _reindex
 {
-  "index.number_of_replicas": 1
+  "source": {
+    "index": "my-index-2099.10.*"
+  },
+  "dest": {
+    "index": "my-index-2099.10"
+  }
 }

@@ -1,4 +1,6 @@
-POST _ml/datafeeds/datafeed-low_request_rate/_stop
+PUT _ml/trained_models/elastic__distilbert-base-uncased-finetuned-conll03-english/part/0
 {
-  "timeout": "30s"
+    "definition": "...",
+    "total_definition_length": 265632637,
+    "total_parts": 64
 }

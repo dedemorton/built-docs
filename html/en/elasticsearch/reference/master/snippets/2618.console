@@ -1,7 +1,11 @@
-POST _watcher/watch/my_watch/_execute
+PUT my-index-000002
 {
-  "action_modes" : {
-    "action1" : "force_simulate",
-    "action2" : "skip"
+  "mappings": {
+    "properties": {
+      "datetime": {
+        "type": "date",
+        "format": "uuuu/MM/dd HH:mm:ss||uuuu/MM/dd||epoch_millis"
+      }
+    }
   }
 }

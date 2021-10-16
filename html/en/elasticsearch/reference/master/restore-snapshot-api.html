@@ -140,7 +140,7 @@ Not what you want? See the
 <div class="pre_wrapper lang-console">
 <pre class="programlisting prettyprint lang-console">POST /_snapshot/my_repository/my_snapshot/_restore</pre>
 </div>
-<div class="console_widget" data-snippet="snippets/2573.console"></div>
+<div class="console_widget" data-snippet="snippets/2559.console"></div>
 <div class="section">
 <div class="titlepage"><div><div>
 <h3 class="title"><a id="restore-snapshot-api-request"></a>Request<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/snapshot-restore/apis/restore-snapshot-api.asciidoc">edit</a></h3>
@@ -155,9 +155,13 @@ Not what you want? See the
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-If you use the Elasticsearch security features, you must have the <code class="literal">manage</code> or
-<code class="literal">cluster:admin/snapshot/*</code> cluster privilege to restore a snapshot.
+If you use Elasticsearch security features, you must have the <code class="literal">manage</code> or
+<code class="literal">cluster:admin/snapshot/*</code> cluster privilege to use this API.
 </li>
+</ul>
+</div>
+<div class="ulist itemizedlist">
+<ul class="itemizedlist">
 <li class="listitem">
 You can only restore a snapshot to a running cluster with an elected
 <a class="xref" href="modules-node.html#master-node" title="Master-eligible node">master node</a>. The snapshot&#8217;s repository must be
@@ -165,7 +169,12 @@ You can only restore a snapshot to a running cluster with an elected
 </li>
 <li class="listitem">
 The snapshot and cluster versions must be compatible. See
-<a class="xref" href="snapshot-restore.html#snapshot-restore-version-compatibility" title="Version compatibility">Version compatibility</a>.
+<a class="xref" href="snapshot-restore.html#snapshot-restore-version-compatibility" title="Snapshot compatibility">Snapshot compatibility</a>.
+</li>
+<li class="listitem">
+To restore a snapshot, the cluster&#8217;s global metadata must be writable. Ensure
+there aren&#8217;t any <a class="xref" href="modules-cluster.html#cluster-read-only" title="Metadata">cluster blocks</a> that prevent writes. The
+restore operation ignores <a class="xref" href="index-modules-blocks.html" title="Index blocks">index blocks</a>.
 </li>
 <li class="listitem">
 If you restore a data stream, ensure the cluster contains a
@@ -302,22 +311,23 @@ If <code class="literal">false</code>, the global state is not restored. Default
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
-Persistent cluster settings
+<a class="xref" href="settings.html#cluster-setting-types" title="Cluster and node setting types">Persistent cluster settings</a>
 </li>
 <li class="listitem">
-Index templates
+<a class="xref" href="index-templates.html" title="Index templates">Index templates</a>
 </li>
 <li class="listitem">
-Legacy index templates
+<a class="xref" href="indices-templates-v1.html" title="Create or update index template API">Legacy index templates</a>
 </li>
 <li class="listitem">
-Ingest pipelines
+<a class="xref" href="ingest.html" title="Ingest pipelines">Ingest pipelines</a>
 </li>
 <li class="listitem">
-ILM lifecycle policies
+<a class="xref" href="index-lifecycle-management.html" title="ILM: Manage the index lifecycle">ILM policies</a>
 </li>
 <li class="listitem">
-For snapshots taken after 7.12.0, data stored in system indices, such as Watches and task records, replacing any existing configuration (configurable via <code class="literal">feature_states</code>)
+For snapshots taken after 7.12.0, data stored in system indices, such as
+Watches and task records.
 </li>
 </ul>
 </div>
@@ -327,6 +337,8 @@ snapshot, replacing any existing ones whose name matches one in the snapshot.
 It completely removes all persistent settings, non-legacy index templates,
 ingest pipelines and ILM lifecycle policies that exist in your cluster
 and replaces them with the corresponding items from the snapshot.</p>
+<p>You can use the <code class="literal">feature_states</code> parameter to configure how system indices
+are restored from the cluster state.</p>
 </dd>
 </dl>
 </div>
@@ -449,7 +461,7 @@ Defines the rename replacement string. See <a class="xref" href="restore-snapsho
   "include_aliases": false
 }</pre>
 </div>
-<div class="console_widget" data-snippet="snippets/2574.console"></div>
+<div class="console_widget" data-snippet="snippets/2560.console"></div>
 <p>The API returns an acknowledgement if the request succeeds. If the request encounters errors, the response indicates any issues found, such as
 open indices that are blocking the restore operation from completing.</p>
 </div>

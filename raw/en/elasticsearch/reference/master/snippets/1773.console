@@ -1,1 +1,1 @@
-GET /_cat/allocation?v=true
+GET /_cat/nodeattrs?v=true&h=name,pid,attr,value

@@ -1,1 +1,1 @@
-DELETE /_ccr/auto_follow/<auto_follow_pattern_name>
+POST /_data_stream/_promote/my-data-stream

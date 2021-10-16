@@ -1,4 +1,10 @@
-POST /_security/oauth2/token
+GET /_security/_query/api_key
 {
-  "grant_type" : "client_credentials"
+  "query": {
+    "ids": {
+      "values": [
+        "VuaCfGcBCdbkQm-e5aOx"
+      ]
+    }
+  }
 }

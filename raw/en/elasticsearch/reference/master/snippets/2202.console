@@ -1,9 +1,5 @@
-POST /my-index-000001/_doc?refresh=wait_for
+POST /_ilm/migrate_to_data_tiers
 {
-  "user_id" : 12345
-}
-
-POST /my-index-000001/_doc?refresh=wait_for
-{
-  "user_id" : 12346
+  "legacy_template_to_delete": "global-template",
+  "node_attribute": "custom_attribute_name"
 }

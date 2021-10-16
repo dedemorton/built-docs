@@ -1,28 +1,7 @@
-POST _watcher/watch/_execute
+POST /_aliases
 {
-  "watch" : {
-    "trigger" : { "schedule" : { "interval" : "10s" } },
-    "input" : {
-      "search" : {
-        "request" : {
-          "indices" : [ "logs" ],
-          "body" : {
-            "query" : {
-              "match" : { "message": "error" }
-            }
-          }
-        }
-      }
-    },
-    "condition" : {
-      "compare" : { "ctx.payload.hits.total" : { "gt" : 0 }}
-    },
-    "actions" : {
-      "log_error" : {
-        "logging" : {
-          "text" : "Found {{ctx.payload.hits.total}} errors in the logs"
-        }
-      }
-    }
-  }
+  "actions" : [
+    { "remove" : { "index" : "my-index-000001", "alias" : "my-index" } },
+    { "add" : { "index" : "my-index-000002", "alias" : "my-index" } }
+  ]
 }

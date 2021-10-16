@@ -1,6 +1,9 @@
-POST _watcher/watch/my_watch/_execute
+POST _reindex
 {
-  "action_modes" : {
-    "_all" : "force_execute"
+  "source": {
+    "index": "my-index-000001"
+  },
+  "dest": {
+    "index": "my-index-000002"
   }
 }

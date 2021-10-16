@@ -1,10 +1,8 @@
-GET index/_search
+PUT _cluster/settings
 {
-  "aggs": {
-    "price_ranges": {
-      "terms": {
-        "field": "price_range"
-      }
-    }
+  "persistent": {
+    "cluster.routing.allocation.disk.watermark.low": null,
+    "cluster.routing.allocation.disk.watermark.high": null,
+    "cluster.routing.allocation.disk.watermark.flood_stage": null
   }
 }
