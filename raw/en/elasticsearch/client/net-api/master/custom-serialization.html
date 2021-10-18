@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Custom Serialization | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Custom Serialization | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="serialization.html" title="Serialization"/>
 <link rel="prev" href="serialization.html" title="Serialization"/>
 <link rel="next" href="extending-nest-types.html" title="Extending NEST types"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="nest.html">NEST - High level client</a></span>
 »
@@ -80,7 +80,7 @@ and is responsible for serializing the request and response types that are part 
 <p>If <code class="literal">SourceSerializer</code> is left unconfigured, the internal <code class="literal">RequestResponseSerializer</code> is the <code class="literal">SourceSerializer</code> as well.</p>
 <p>Implementing <code class="literal">IElasticsearchSerializer</code> is technically enough to inject your own <code class="literal">SourceSerializer</code></p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">public class VanillaSerializer : ITransportSerializer
+<pre class="programlisting prettyprint lang-csharp">public class VanillaSerializer : IElasticsearchSerializer
 {
     public T Deserialize&lt;T&gt;(Stream stream) =&gt; throw new NotImplementedException();
 
@@ -189,7 +189,7 @@ and override the <code class="literal">CreateJsonSerializerSettings</code> and <
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">public class MyFirstCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 {
-    public MyFirstCustomJsonNetSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+    public MyFirstCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
         : base(builtinSerializer, connectionSettings) { }
 
     protected override JsonSerializerSettings CreateJsonSerializerSettings() =&gt;
@@ -202,7 +202,7 @@ and override the <code class="literal">CreateJsonSerializerSettings</code> and <
         resolver.NamingStrategy = new SnakeCaseNamingStrategy();
 }</pre>
 </div>
-<p>Using <code class="literal">MyFirstCustomJsonNetSerializer</code>, we can serialize using</p>
+<p>Using <code class="literal">MyCustomJsonNetSerializer</code>, we can serialize using</p>
 <div class="ulist itemizedlist">
 <ul class="itemizedlist">
 <li class="listitem">
@@ -311,7 +311,7 @@ returning covariant document types within a collection.</p>
 
 public class MySecondCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 {
-    public MySecondCustomJsonNetSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+    public MySecondCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
         : base(builtinSerializer, connectionSettings) { }
 
     protected override JsonSerializerSettings CreateJsonSerializerSettings() =&gt;

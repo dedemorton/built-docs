@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Fail over | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Fail over | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="retries-and-failover.html" title="Retries and failover"/>
 <link rel="prev" href="retries-and-failover.html" title="Retries and failover"/>
 <link rel="next" href="retries.html" title="Retries"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -137,8 +137,8 @@ Not what you want? See the
 <p>When using a connection pool with more than one node, a request will be retried if
 the call to a node throws an exception or returns a 502, 503 or 504 response</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .ClientCalls(r =&gt; r.FailAlways())
     .ClientCalls(r =&gt; r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -147,8 +147,8 @@ the call to a node throws an exception or returns a 502, 503 or 504 response</p>
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { BadResponse, 9200 },
-        { HealthyResponse, 9201 },
+        { AuditEvent.BadResponse, 9200 },
+        { AuditEvent.HealthyResponse, 9201 },
     }
 );</pre>
 </div>
@@ -158,8 +158,8 @@ audit = await audit.TraceCall(
 </div></div></div>
 <p>Will be treated as an error that requires retrying</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .ClientCalls(r =&gt; r.FailAlways(502))
     .ClientCalls(r =&gt; r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -168,8 +168,8 @@ audit = await audit.TraceCall(
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { BadResponse, 9200 },
-        { HealthyResponse, 9201 },
+        { AuditEvent.BadResponse, 9200 },
+        { AuditEvent.HealthyResponse, 9201 },
     }
 );</pre>
 </div>
@@ -181,8 +181,8 @@ audit = await audit.TraceCall(
 </div></div></div>
 <p>Will be treated as an error that requires retrying</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .ClientCalls(r =&gt; r.FailAlways(503))
     .ClientCalls(r =&gt; r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -191,8 +191,8 @@ audit = await audit.TraceCall(
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { BadResponse, 9200 },
-        { HealthyResponse, 9201 },
+        { AuditEvent.BadResponse, 9200 },
+        { AuditEvent.HealthyResponse, 9201 },
     }
 );</pre>
 </div>
@@ -204,8 +204,8 @@ audit = await audit.TraceCall(
 </div></div></div>
 <p>Will be treated as an error that requires retrying</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .ClientCalls(r =&gt; r.FailAlways(504))
     .ClientCalls(r =&gt; r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -214,8 +214,8 @@ audit = await audit.TraceCall(
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { BadResponse, 9200 },
-        { HealthyResponse, 9201 },
+        { AuditEvent.BadResponse, 9200 },
+        { AuditEvent.HealthyResponse, 9201 },
     }
 );</pre>
 </div>
@@ -228,8 +228,8 @@ a <span class="strong strong"><strong>404 Not Found</strong></span> response is 
 </div>
 </div>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .ClientCalls(r =&gt; r.FailAlways(418))
     .ClientCalls(r =&gt; r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -238,7 +238,7 @@ a <span class="strong strong"><strong>404 Not Found</strong></span> response is 
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { BadResponse, 9200 },
+        { AuditEvent.BadResponse, 9200 },
     }
 );</pre>
 </div>

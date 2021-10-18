@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Sniffing periodically | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Sniffing periodically | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="sniffing-behaviour.html" title="Sniffing behaviour"/>
 <link rel="prev" href="sniffing-on-connection-failure.html" title="Sniffing on connection failure"/>
 <link rel="next" href="sniffing-role-detection.html" title="Sniffing role detection"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -140,16 +140,16 @@ clusters are often scaled horizontally during peak hours. An application might h
 but without sniffing periodically, it will never find the nodes that have been added as part of horizontal scaling,
 to help out with load</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .MasterEligible(9202, 9203, 9204)
     .ClientCalls(r =&gt; r.SucceedAlways())
-    .Sniff(s =&gt; s.SucceedAlways(Virtual.Elasticsearch
-        .Bootstrap(100)
+    .Sniff(s =&gt; s.SucceedAlways(VirtualClusterWith
+        .Nodes(100)
         .MasterEligible(9202, 9203, 9204)
         .ClientCalls(r =&gt; r.SucceedAlways())
-        .Sniff(ss =&gt; ss.SucceedAlways(Virtual.Elasticsearch
-            .Bootstrap(10)
+        .Sniff(ss =&gt; ss.SucceedAlways(VirtualClusterWith
+            .Nodes(10)
             .MasterEligible(9202, 9203, 9204)
             .ClientCalls(r =&gt; r.SucceedAlways())
         ))

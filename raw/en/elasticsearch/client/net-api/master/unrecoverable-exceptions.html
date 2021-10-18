@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Unrecoverable exceptions | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Unrecoverable exceptions | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="thrown-exceptions.html" title="Exceptions"/>
 <link rel="prev" href="unexpected-exceptions.html" title="Unexpected exceptions"/>
 <link rel="next" href="transports-and-pipelines.html" title="Transports and pipelines"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -52,7 +52,7 @@ exception, and the client understands that an exception under these circumstance
 but by exiting the pipeline.</p>
 </div>
 </div>
-<p>By default, the client won&#8217;t throw on any <code class="literal">TransportException</code> but instead return an invalid response
+<p>By default, the client won&#8217;t throw on any <code class="literal">ElasticsearchClientException</code> but instead return an invalid response
 that can be detected by checking the <code class="literal">.IsValid</code> property on the response. You can change this behaviour with
 by using <code class="literal">ThrowExceptions()</code> on <a class="xref" href="configuration-options.html" title="Configuration options"><code class="literal">ConnectionSettings</code></a>.</p>
 <div class="pre_wrapper lang-csharp">
@@ -88,8 +88,8 @@ foreach (var failure in failures)
 <p>As an example, let&#8217;s use our Virtual cluster test framework to set up a 10 node cluster
 that always succeeds when pinged but fails with a 401 response when making client calls</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .Ping(r =&gt; r.SucceedAlways()) <a id="CO5-1"></a><i class="conum" data-value="1"></i>
     .ClientCalls(r =&gt; r.FailAlways(401)) <a id="CO5-2"></a><i class="conum" data-value="2"></i>
     .StaticConnectionPool()
@@ -121,8 +121,8 @@ followed by a bad response as a result of the 401 bad authentication response</p
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { PingSuccess, 9200 }, <a id="CO6-1"></a><i class="conum" data-value="1"></i>
-        { BadResponse, 9200 }, <a id="CO6-2"></a><i class="conum" data-value="2"></i>
+        { AuditEvent.PingSuccess, 9200 }, <a id="CO6-1"></a><i class="conum" data-value="1"></i>
+        { AuditEvent.BadResponse, 9200 }, <a id="CO6-2"></a><i class="conum" data-value="2"></i>
     },
     exception =&gt;
     {
@@ -165,8 +165,8 @@ bad json. In the following example an HTML response is return but with an applic
 under your control you would need to be able to fix this in the client. Here we make the client aware that 401 responses
 should never be deserialized by calling <code class="literal">SkipDeserializationForStatusCodes()</code> on <code class="literal">ConnectionSettings</code>.</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .Ping(r =&gt; r.SucceedAlways())
     .ClientCalls(r =&gt; r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) <a id="CO7-1"></a><i class="conum" data-value="1"></i>
     .StaticConnectionPool()
@@ -175,8 +175,8 @@ should never be deserialized by calling <code class="literal">SkipDeserializatio
 
 audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { PingSuccess, 9200 },
-        { BadResponse, 9201 },
+        { AuditEvent.PingSuccess, 9200 },
+        { AuditEvent.BadResponse, 9201 },
     },
     (e) =&gt;
     {
@@ -211,8 +211,8 @@ as before, but this time however, the response body bytes are captured in the re
 Also note that in this example the 401 returns the correct mime type for html so the client wont try to deserialize to json and
 we no longer need to set <code class="literal">SkipDeserializationForStatusCodes()</code></p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .Ping(r =&gt; r.SucceedAlways())
     .ClientCalls(r =&gt; r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "text/html"))
     .StaticConnectionPool()
@@ -221,8 +221,8 @@ we no longer need to set <code class="literal">SkipDeserializationForStatusCodes
 
 audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { PingSuccess, 9200 },
-        { BadResponse, 9200 },
+        { AuditEvent.PingSuccess, 9200 },
+        { AuditEvent.BadResponse, 9200 },
     },
     (e) =&gt;
     {

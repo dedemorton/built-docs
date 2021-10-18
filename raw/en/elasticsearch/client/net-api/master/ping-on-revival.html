@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ping on revival | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Ping on revival | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="pinging-behaviour.html" title="Pinging behaviour"/>
 <link rel="prev" href="ping-on-first-usage.html" title="Ping on first usage"/>
 <link rel="next" href="round-robin.html" title="Round robin behaviour"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -43,8 +43,8 @@ Once it <em>comes out of the dog house</em>, or revived, a ping is scheduled bef
 that it&#8217;s up and running. If it&#8217;s still down, it&#8217;s put <em>back in the dog house</em> a little longer.</p>
 <p>Take a look at the <a class="xref" href="request-timeout.html" title="Request timeouts">Request timeouts</a> for an explanation on what each timeout is.</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(3)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(3)
     .ClientCalls(r =&gt; r.SucceedAlways())
     .ClientCalls(r =&gt; r.OnPort(9202).Fails(Once))
     .Ping(p =&gt; p.SucceedAlways())

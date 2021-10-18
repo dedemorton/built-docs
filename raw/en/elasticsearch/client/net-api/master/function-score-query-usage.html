@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Function Score Query Usage | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Function Score Query Usage | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="compound-queries.html" title="Compound queries"/>
 <link rel="prev" href="dismax-query-usage.html" title="Dismax Query Usage"/>
 <link rel="next" href="joining-queries.html" title="Joining queries"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="query-dsl.html">Query DSL</a></span>
 »
@@ -40,7 +40,7 @@ Not what you want? See the
 </div></div></div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_fluent_dsl_example_65"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/query-dsl/compound/function-score/function-score-query-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_fluent_dsl_example_61"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/query-dsl/compound/function-score/function-score-query-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">q
@@ -73,19 +73,7 @@ Not what you want? See the
             .Scale(Distance.Miles(1))
             .MultiValueMode(MultiValueMode.Average)
         )
-        .FieldValueFactor(b =&gt; b
-            .Field(p =&gt; p.NumberOfContributors)
-            .Factor(1.1)
-            .Missing(0.1)
-            .Modifier(FieldValueFactorModifier.Square)
-            .Weight(3)
-            .Filter(fi =&gt; fi
-                .Term(t =&gt; t
-                    .Field(p =&gt; p.Branches)
-                    .Value("dev")
-                )
-            )
-        )
+        .FieldValueFactor(b =&gt; b.Field(p =&gt; p.NumberOfContributors).Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Square))
         .RandomScore(r =&gt; r.Seed(1337).Field("_seq_no"))
         .RandomScore(r =&gt; r.Seed("randomstring").Field("_seq_no"))
         .Weight(1.0)
@@ -102,7 +90,7 @@ Not what you want? See the
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_object_initializer_syntax_example_65"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/query-dsl/compound/function-score/function-score-query-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_object_initializer_syntax_example_61"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/query-dsl/compound/function-score/function-score-query-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">new FunctionScoreQuery()
@@ -138,16 +126,7 @@ Not what you want? See the
         },
         new FieldValueFactorFunction
         {
-            Field = Field&lt;Project&gt;(p =&gt; p.NumberOfContributors),
-            Factor = 1.1,
-            Missing = 0.1,
-            Modifier = FieldValueFactorModifier.Square,
-            Weight = 3,
-            Filter = new TermQuery
-            {
-                Field = Field&lt;Project&gt;(p =&gt; p.Branches),
-                Value = "dev"
-            }
+            Field = Field&lt;Project&gt;(p =&gt; p.NumberOfContributors), Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Square
         },
         new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
         new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
@@ -203,20 +182,12 @@ Not what you want? See the
         }
       },
       {
-        "filter": {
-          "term": {
-            "branches": {
-              "value": "dev"
-            }
-          }
-        },
         "field_value_factor": {
           "field": "numberOfContributors",
           "factor": 1.1,
           "missing": 0.1,
           "modifier": "square"
-        },
-        "weight": 3.0
+        }
       },
       {
         "random_score": {

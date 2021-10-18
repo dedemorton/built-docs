@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Search After Usage | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Search After Usage | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="reference-search.html" title="Search"/>
 <link rel="prev" href="script-fields-usage.html" title="Script Fields Usage"/>
 <link rel="next" href="sliced-scroll-search-usage.html" title="Sliced Scroll Search Usage"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="reference-search.html">Search</a></span>
 »
@@ -36,7 +36,7 @@ Not what you want? See the
 <div class="titlepage"><div><div>
 <h2 class="title"><a id="search-after-usage"></a>Search After Usage<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h2>
 </div></div></div>
-<h3><a id="_fluent_dsl_example_15"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h3>
+<h3><a id="_fluent_dsl_example_14"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h3>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">s =&gt; s
 .Sort(srt =&gt; srt
@@ -48,9 +48,9 @@ Not what you want? See the
     Project.First.Name
 )</pre>
 </div>
-<h3><a id="_object_initializer_syntax_example_15"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h3>
+<h3><a id="_object_initializer_syntax_example_14"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h3>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">new SearchRequest&lt;Project&gt;()
+<pre class="programlisting prettyprint lang-csharp">new SearchRequest&lt;Project&gt;
 {
     Sort = new List&lt;ISort&gt;
     {
@@ -62,48 +62,6 @@ Not what you want? See the
         Project.First.NumberOfCommits,
         Project.First.Name,
     }
-}</pre>
-</div>
-<p><strong>Example json output.</strong></p>
-<div class="pre_wrapper lang-javascript">
-<pre class="programlisting prettyprint lang-javascript">{
-  "sort": [
-    {
-      "numberOfCommits": {
-        "order": "desc"
-      }
-    },
-    {
-      "name": {
-        "order": "desc"
-      }
-    }
-  ],
-  "search_after": [
-    775,
-    "Lesch Group"
-  ]
-}</pre>
-</div>
-<h3><a id="_fluent_dsl_example_16"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h3>
-<div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">s =&gt; s
-.Sort(srt =&gt; srt
-    .Descending(p =&gt; p.NumberOfCommits)
-    .Descending(p =&gt; p.Name)
-)
-.SearchAfter(_previousSort)</pre>
-</div>
-<h3><a id="_object_initializer_syntax_example_16"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/search/request/search-after-usage.asciidoc">edit</a></h3>
-<div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">new SearchRequest&lt;Project&gt;()
-{
-    Sort = new List&lt;ISort&gt;
-    {
-        new FieldSort { Field = Field&lt;Project&gt;(p =&gt; p.NumberOfCommits), Order = SortOrder.Descending },
-        new FieldSort { Field = Field&lt;Project&gt;(p =&gt; p.Name), Order = SortOrder.Descending }
-    },
-    SearchAfter = _previousSort.ToList()
 }</pre>
 </div>
 <p><strong>Example json output.</strong></p>

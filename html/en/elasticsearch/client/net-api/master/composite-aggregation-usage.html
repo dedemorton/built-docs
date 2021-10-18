@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Composite Aggregation Usage | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Composite Aggregation Usage | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="bucket-aggregations.html" title="Bucket Aggregations"/>
 <link rel="prev" href="children-aggregation-usage.html" title="Children Aggregation Usage"/>
 <link rel="next" href="date-histogram-aggregation-usage.html" title="Date Histogram Aggregation Usage"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="reference-aggregations.html">Aggregations</a></span>
 »
@@ -150,7 +150,7 @@ for each document and each combination is considered as a composite bucket.</p>
 <p>Be sure to read the Elasticsearch documentation on <a href="/guide/en/elasticsearch/reference/master/search-aggregations-bucket-composite-aggregation.html" class="ulink" target="_top">Composite Aggregation</a>.</p>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_fluent_dsl_example_150"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_fluent_dsl_example_142"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">a =&gt; a
@@ -161,7 +161,7 @@ for each document and each combination is considered as a composite bucket.</p>
         )
         .DateHistogram("started", d =&gt; d
             .Field(f =&gt; f.StartedOn)
-            .CalendarInterval(DateInterval.Month)
+            .Interval(DateInterval.Month)
         )
         .Histogram("branch_count", h =&gt; h
             .Field(f =&gt; f.RequiredBranches)
@@ -186,7 +186,7 @@ for each document and each combination is considered as a composite bucket.</p>
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_object_initializer_syntax_example_150"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_object_initializer_syntax_example_142"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">new CompositeAggregation("my_buckets")
@@ -200,7 +200,7 @@ for each document and each combination is considered as a composite bucket.</p>
         new DateHistogramCompositeAggregationSource("started")
         {
             Field = Field&lt;Project&gt;(f =&gt; f.StartedOn),
-            CalendarInterval = DateInterval.Month
+            Interval = DateInterval.Month
         },
         new HistogramCompositeAggregationSource("branch_count")
         {
@@ -240,7 +240,7 @@ for each document and each combination is considered as a composite bucket.</p>
           "started": {
             "date_histogram": {
               "field": "startedOn",
-              "calendar_interval": "month"
+              "interval": "month"
             }
           }
         },
@@ -283,7 +283,7 @@ for each document and each combination is considered as a composite bucket.</p>
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_handling_responses_40"></a>Handling Responses<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_handling_responses_36"></a>Handling Responses<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <p>Each Composite aggregation bucket key is a <code class="literal">CompositeKey</code> type, a specialized
 <code class="literal">IReadOnlyDictionary&lt;string, object&gt;</code> type with methods to convert values to supported types</p>
@@ -337,7 +337,7 @@ It is possible to include them in the response by setting missing_bucket to <cod
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_fluent_dsl_example_151"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_fluent_dsl_example_143"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">a =&gt; a
@@ -363,7 +363,7 @@ It is possible to include them in the response by setting missing_bucket to <cod
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_object_initializer_syntax_example_151"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_object_initializer_syntax_example_143"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">new CompositeAggregation("my_buckets")
@@ -425,7 +425,7 @@ It is possible to include them in the response by setting missing_bucket to <cod
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_handling_responses_41"></a>Handling Responses<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_handling_responses_37"></a>Handling Responses<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/bucket/composite/composite-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <p>Each Composite aggregation bucket key is an <code class="literal">CompositeKey</code>, a specialized
 <code class="literal">IReadOnlyDictionary&lt;string, object&gt;</code> type with methods to convert values to supported types</p>

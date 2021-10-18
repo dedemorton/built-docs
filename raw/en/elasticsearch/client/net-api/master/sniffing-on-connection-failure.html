@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sniffing on connection failure | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Sniffing on connection failure | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="sniffing-behaviour.html" title="Sniffing behaviour"/>
 <link rel="prev" href="sniffing-on-startup.html" title="Sniffing on startup"/>
 <link rel="next" href="sniffing-periodically.html" title="Sniffing periodically"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -46,18 +46,17 @@ a sniff tries to get the nodes by asking each node it currently knows about, unt
 9202, 9203, 9204 are master eligible nodes. Our virtualized cluster will throw once when doing
 a search on 9201. This should cause a sniff to be kicked off.</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(5)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(5)
     .MasterEligible(9202, 9203, 9204)
     .ClientCalls(r =&gt; r.SucceedAlways())
     .ClientCalls(r =&gt; r.OnPort(9201).Fails(Once)) <a id="CO12-1"></a><i class="conum" data-value="1"></i>
-    .Sniff(p =&gt; p.SucceedAlways(Virtual.Elasticsearch
-        .Bootstrap(3)
+    .Sniff(p =&gt; p.SucceedAlways(VirtualClusterWith
+        .Nodes(3)
         .MasterEligible(9200, 9202)
         .ClientCalls(r =&gt; r.OnPort(9201).Fails(Once))
-        .ClientCalls(r =&gt; r.SucceedAlways())
-        .Sniff(s =&gt; s.SucceedAlways(Virtual.Elasticsearch <a id="CO12-2"></a><i class="conum" data-value="2"></i>
-            .Bootstrap(3, 9210)
+        .Sniff(s =&gt; s.SucceedAlways(VirtualClusterWith <a id="CO12-2"></a><i class="conum" data-value="2"></i>
+            .Nodes(3, 9210)
             .MasterEligible(9210, 9212)
             .ClientCalls(r =&gt; r.SucceedAlways())
             .Sniff(r =&gt; r.SucceedAlways())
@@ -149,24 +148,19 @@ audit = await audit.TraceCalls(
 <p>Here we set up our cluster exactly the same as the previous setup
 Only we enable pinging (default is <code class="literal">true</code>) and make the ping fail</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(5)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(5)
     .MasterEligible(9202, 9203, 9204)
     .Ping(r =&gt; r.OnPort(9201).Fails(Once))
-    .Ping(r =&gt; r.SucceedAlways())
-    .ClientCalls(c=&gt;c.SucceedAlways())
-    .Sniff(p =&gt; p.SucceedAlways(Virtual.Elasticsearch
-        .Bootstrap(3)
+    .Sniff(p =&gt; p.SucceedAlways(VirtualClusterWith
+        .Nodes(3)
         .MasterEligible(9200, 9202)
         .Ping(r =&gt; r.OnPort(9201).Fails(Once))
-        .Ping(r =&gt; r.SucceedAlways())
-        .ClientCalls(c=&gt;c.SucceedAlways())
-        .Sniff(s =&gt; s.SucceedAlways(Virtual.Elasticsearch
-            .Bootstrap(3, 9210)
+        .Sniff(s =&gt; s.SucceedAlways(VirtualClusterWith
+            .Nodes(3, 9210)
             .MasterEligible(9210, 9211)
             .Ping(r =&gt; r.SucceedAlways())
             .Sniff(r =&gt; r.SucceedAlways())
-            .ClientCalls(c=&gt;c.SucceedAlways())
         ))
     ))
     .SniffingConnectionPool()
@@ -252,18 +246,14 @@ audit = await audit.TraceCalls(
 <h3 class="title"><a id="_client_uses_publish_address"></a>Client uses publish address<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/client-concepts/connection-pooling/sniffing/on-connection-failure.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-        .Bootstrap(2)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+        .Nodes(2)
         .MasterEligible(9200)
-        .ClientCalls(c=&gt;c.SucceedAlways())
         .Ping(r =&gt; r.OnPort(9200).Fails(Once))
-        .Ping(c=&gt;c.SucceedAlways())
-        .Sniff(p =&gt; p.SucceedAlways(Virtual.Elasticsearch
-            .Bootstrap(10)
-            .MasterEligible(9200, 9202, 9201)
-            .PublishAddress("10.0.12.1")
-            .ClientCalls(c=&gt;c.SucceedAlways())
-            .Ping(c=&gt;c.SucceedAlways())
+        .Sniff(p =&gt; p.SucceedAlways(VirtualClusterWith
+                .Nodes(10)
+                .MasterEligible(9200, 9202, 9201)
+                .PublishAddress("10.0.12.1")
         ))
         .SniffingConnectionPool()
         .Settings(s =&gt; s.SniffOnStartup(false))
@@ -279,7 +269,7 @@ void SniffUrlAssert(Audit a, string host, int expectedPort)
     HostAssert(a, host, expectedPort);
     var sniffUri = new UriBuilder(a.Node.Uri)
     {
-        Path = ElasticsearchProductRegistration.SniffPath,
+        Path = RequestPipeline.SniffPath,
         Query = "flat_settings=true&amp;timeout=2s"
     }.Uri;
     sniffUri.PathEquals(a.Path, nameof(SniffUrlAssert));

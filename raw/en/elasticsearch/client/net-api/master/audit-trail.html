@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Audit trail | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Audit trail | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="debugging.html" title="Debugging"/>
 <link rel="prev" href="debugging.html" title="Debugging"/>
 <link rel="next" href="debug-information.html" title="Debug information"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="troubleshooting.html">Troubleshooting</a></span>
 »
@@ -78,10 +78,10 @@ readable fashion, similar to</p>
 <p>But can also be accessed manually:</p>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">response.ApiCall.AuditTrail.Count.Should().Be(4, "{0}", debug);
-response.ApiCall.AuditTrail[0].Event.Should().Be(SniffOnStartup, "{0}", debug);
-response.ApiCall.AuditTrail[1].Event.Should().Be(SniffSuccess, "{0}", debug);
-response.ApiCall.AuditTrail[2].Event.Should().Be(PingSuccess, "{0}", debug);
-response.ApiCall.AuditTrail[3].Event.Should().Be(HealthyResponse, "{0}", debug);</pre>
+response.ApiCall.AuditTrail[0].Event.Should().Be(AuditEvent.SniffOnStartup, "{0}", debug);
+response.ApiCall.AuditTrail[1].Event.Should().Be(AuditEvent.SniffSuccess, "{0}", debug);
+response.ApiCall.AuditTrail[2].Event.Should().Be(AuditEvent.PingSuccess, "{0}", debug);
+response.ApiCall.AuditTrail[3].Event.Should().Be(AuditEvent.HealthyResponse, "{0}", debug);</pre>
 </div>
 <p>Each audit has a started and ended <code class="literal">DateTime</code> on it that will provide
 some understanding of how long it took</p>

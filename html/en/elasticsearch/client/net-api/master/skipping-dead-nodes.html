@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Skipping dead nodes | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Skipping dead nodes | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="round-robin.html" title="Round robin behaviour"/>
 <link rel="prev" href="round-robin.html" title="Round robin behaviour"/>
 <link rel="next" href="retries-and-failover.html" title="Retries and failover"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -205,8 +205,8 @@ n.IsResurrected.Should().BeTrue();</pre>
 </div>
 <p>A cluster with 2 nodes where the second node fails on ping</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(4)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(4)
     .ClientCalls(p =&gt; p.Succeeds(Always))
     .ClientCalls(p =&gt; p.OnPort(9201).FailAlways())
     .ClientCalls(p =&gt; p.OnPort(9203).FailAlways())
@@ -278,8 +278,8 @@ await audit.TraceCalls(
 </div>
 <p>A cluster with 2 nodes where the second node fails on ping</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(4)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(4)
     .ClientCalls(p =&gt; p.Fails(Always))
     .StaticConnectionPool()
     .Settings(p=&gt;p.DisablePing())

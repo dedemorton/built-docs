@@ -4364,8 +4364,8 @@ elasticsearch-net:
   .NET Clients/docs/5.x: 80e9b969d3fbb51039bc61c02ba05c31334135f6
   .NET Clients/docs/6.x: b304d5484f4f9a8c7dece993af2ccccd71a4a6f7
   .NET Clients/docs/7.x: 237fb13d9af5925006b03cab9ab0549bdcd323b2
-  .NET Clients/docs/master: d43d12531b44b3a67c6a81b3c5e5d929992341f4
-  Elasticsearch Guide/examples/master: d43d12531b44b3a67c6a81b3c5e5d929992341f4
+  .NET Clients/docs/master: local
+  Elasticsearch Guide/examples/master: local
 elasticsearch-perl:
   Perl Client/docs/master: 13c85094244c98774bf45c205d0d2c6473414b08
 elasticsearch-php:

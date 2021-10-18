@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Exceptions | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Exceptions | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="api-conventions.html" title="API Conventions"/>
 <link rel="prev" href="lifetimes.html" title="Lifetimes"/>
 <link rel="next" href="unexpected-exceptions.html" title="Unexpected exceptions"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -137,7 +137,7 @@ Not what you want? See the
 <dl class="variablelist">
 <dt>
 <span class="term">
-<code class="literal">TransportException</code>
+<code class="literal">ElasticsearchClientException</code>
 </span>
 </dt>
 <dd>
@@ -149,12 +149,12 @@ root causing exception.
 </dd>
 <dt>
 <span class="term">
-<code class="literal">UnexpectedTransportException</code>
+<code class="literal">UnexpectedElasticsearchClientException</code>
 </span>
 </dt>
 <dd>
 These are unknown exceptions, for instance a response from Elasticsearch not
-properly deserialized.  These are sometimes bugs and <a href="https://github.com/elastic/elasticsearch-net/issues" class="ulink" target="_top">should be reported</a>. This exception also inherits from <code class="literal">TransportException</code>
+properly deserialized.  These are sometimes bugs and <a href="https://github.com/elastic/elasticsearch-net/issues" class="ulink" target="_top">should be reported</a>. This exception also inherits from <code class="literal">ElasticsearchClientException</code>
 so an additional catch block isn&#8217;t necessary, but can be helpful in distinguishing between the two.
 </dd>
 <dt>

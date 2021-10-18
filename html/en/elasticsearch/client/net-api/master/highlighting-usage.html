@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Highlighting Usage | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Highlighting Usage | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="reference-search.html" title="Search"/>
 <link rel="prev" href="from-and-size-usage.html" title="From And Size Usage"/>
 <link rel="next" href="indices-boost-usage.html" title="Indices Boost Usage"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="reference-search.html">Search</a></span>
 »
@@ -148,12 +148,6 @@ The implementation uses either the lucene <code class="literal">highlighter</cod
     .PreTags("&lt;tag1&gt;")
     .PostTags("&lt;/tag1&gt;")
     .Encoder(HighlighterEncoder.Html)
-    .HighlightQuery(q =&gt; q
-        .Match(m =&gt; m
-            .Field(f =&gt; f.Name.Suffix("standard"))
-            .Query("Upton Sons Shield Rice Rowe Roberts")
-        )
-    )
     .Fields(
         fs =&gt; fs
             .Field(p =&gt; p.Name.Suffix("standard"))
@@ -204,11 +198,6 @@ The implementation uses either the lucene <code class="literal">highlighter</cod
         PreTags = new[] { "&lt;tag1&gt;" },
         PostTags = new[] { "&lt;/tag1&gt;" },
         Encoder = HighlighterEncoder.Html,
-        HighlightQuery = new MatchQuery
-        {
-            Query = "Upton Sons Shield Rice Rowe Roberts",
-            Field = "name.standard"
-        },
         Fields = new Dictionary&lt;Field, IHighlightField&gt;
         {
             {
@@ -272,13 +261,6 @@ The implementation uses either the lucene <code class="literal">highlighter</cod
       "&lt;/tag1&gt;"
     ],
     "encoder": "html",
-    "highlight_query": {
-      "match": {
-        "name.standard": {
-          "query": "Upton Sons Shield Rice Rowe Roberts"
-        }
-      }
-    },
     "fields": {
       "name.standard": {
         "type": "plain",

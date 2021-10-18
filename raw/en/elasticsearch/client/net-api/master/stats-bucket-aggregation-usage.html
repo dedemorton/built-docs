@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Stats Bucket Aggregation Usage | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Stats Bucket Aggregation Usage | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="pipeline-aggregations.html" title="Pipeline Aggregations"/>
 <link rel="prev" href="serial-differencing-aggregation-usage.html" title="Serial Differencing Aggregation Usage"/>
 <link rel="next" href="sum-bucket-aggregation-usage.html" title="Sum Bucket Aggregation Usage"/>
@@ -18,7 +18,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="reference-aggregations.html">Aggregations</a></span>
 »
@@ -40,13 +40,13 @@ Not what you want? See the
 </div></div></div>
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_fluent_dsl_example_206"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_fluent_dsl_example_194"></a>Fluent DSL example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">a =&gt; a
 .DateHistogram("projects_started_per_month", dh =&gt; dh
     .Field(p =&gt; p.StartedOn)
-    .CalendarInterval(DateInterval.Month)
+    .Interval(DateInterval.Month)
     .Aggregations(aa =&gt; aa
         .Sum("commits", sm =&gt; sm
             .Field(p =&gt; p.NumberOfCommits)
@@ -61,13 +61,13 @@ Not what you want? See the
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_object_initializer_syntax_example_206"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_object_initializer_syntax_example_194"></a>Object Initializer syntax example<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">new DateHistogramAggregation("projects_started_per_month")
 {
     Field = "startedOn",
-    CalendarInterval = DateInterval.Month,
+    Interval = DateInterval.Month,
     Aggregations = new SumAggregation("commits", "numberOfCommits")
 }
 &amp;&amp; new StatsBucketAggregation("stats_commits_per_month", "projects_started_per_month&gt;commits")</pre>
@@ -78,7 +78,7 @@ Not what you want? See the
   "projects_started_per_month": {
     "date_histogram": {
       "field": "startedOn",
-      "calendar_interval": "month"
+      "interval": "month"
     },
     "aggs": {
       "commits": {
@@ -99,7 +99,7 @@ Not what you want? See the
 
 <div class="section">
 <div class="titlepage"><div><div>
-<h3 class="title"><a id="_handling_responses_94"></a>Handling Responses<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc">edit</a></h3>
+<h3 class="title"><a id="_handling_responses_87"></a>Handling Responses<a class="edit_me" rel="nofollow" title="Edit this page on GitHub" href="https://github.com/elastic/elasticsearch-net/edit/master/docs/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc">edit</a></h3>
 </div></div></div>
 <div class="pre_wrapper lang-csharp">
 <pre class="programlisting prettyprint lang-csharp">response.ShouldBeValid();

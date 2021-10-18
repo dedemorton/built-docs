@@ -3,8 +3,8 @@
   <head>
     
 <meta charset="UTF-8">
-<title>Sniffing on startup | Elasticsearch .NET Clients [master] | Elastic</title>
-<link rel="home" href="index.html" title="Elasticsearch .NET Clients [master]"/>
+<title>Sniffing on startup | Elasticsearch.Net and NEST: the .NET clients [master] | Elastic</title>
+<link rel="home" href="index.html" title="Elasticsearch.Net and NEST: the .NET clients [master]"/>
 <link rel="up" href="sniffing-behaviour.html" title="Sniffing behaviour"/>
 <link rel="prev" href="sniffing-behaviour.html" title="Sniffing behaviour"/>
 <link rel="next" href="sniffing-on-connection-failure.html" title="Sniffing on connection failure"/>
@@ -114,7 +114,7 @@ Not what you want? See the
 </div>
 <div id="content">
 <div class="breadcrumbs">
-<span class="breadcrumb-link"><a href="index.html">Elasticsearch .NET Clients [master]</a></span>
+<span class="breadcrumb-link"><a href="index.html">Elasticsearch.Net and NEST:  the .NET clients [master]</a></span>
 »
 <span class="breadcrumb-link"><a href="api-conventions.html">API Conventions</a></span>
 »
@@ -140,12 +140,10 @@ will sniff on startup by default.</p>
 <p>Here we create a 10 node cluster that uses a <a class="xref" href="connection-pooling.html#sniffing-connection-pool" title="SniffingConnectionPool">Sniffing connection pool</a>, setting
 sniff to fail on all nodes <em>*except*</em> 9202</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .Sniff(s =&gt; s.Fails(Always))
     .Sniff(s =&gt; s.OnPort(9202).Succeeds(Always))
-    .Ping(c=&gt;c.SucceedAlways())
-    .ClientCalls(r =&gt; r.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );</pre>
@@ -188,12 +186,10 @@ a sniff on startup does not occur again.
 </ol>
 </div>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .Sniff(s =&gt; s.Fails(Always))
     .Sniff(s =&gt; s.OnPort(9202).Succeeds(Always))
-    .ClientCalls(r =&gt; r.SucceedAlways())
-    .Ping(c=&gt;c.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -225,17 +221,10 @@ await audit.TraceCalls(
 <p>In this next example, the state of the cluster returned from the successful sniff
 is used for subsequent client requests</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(10)
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(10)
     .Sniff(s =&gt; s.Fails(Always))
-    .Sniff(s =&gt; s.OnPort(9202).Succeeds(Always,
-        Virtual.Elasticsearch.Bootstrap(8, startFrom: 9204)
-            .Ping(c=&gt;c.SucceedAlways())
-            .ClientCalls(c=&gt;c.SucceedAlways())
-
-        )) <a id="CO11-1"></a><i class="conum" data-value="1"></i>
-    .ClientCalls(r =&gt; r.SucceedAlways())
-    .Ping(c=&gt;c.SucceedAlways())
+    .Sniff(s =&gt; s.OnPort(9202).Succeeds(Always, VirtualClusterWith.Nodes(8, startFrom: 9204))) <a id="CO11-1"></a><i class="conum" data-value="1"></i>
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -277,15 +266,13 @@ await audit.TraceCall(new ClientCall {
 </div></div></div>
 <p>Sniffing prefers to run on master eligible nodes</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(new[] {
-        new Node(new Uri("http://localhost:9200"), NotMasterEligible),
-        new Node(new Uri("http://localhost:9201"), NotMasterEligible),
-        new Node(new Uri("http://localhost:9202")),
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(new[] {
+        new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
+        new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
+        new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
     })
     .Sniff(s =&gt; s.Succeeds(Always))
-    .Ping(s =&gt; s.Succeeds(Always))
-    .ClientCalls(r =&gt; r.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -299,16 +286,14 @@ await audit.TraceCall(new ClientCall {
 </div>
 <p>although it will fail over to non-master eligible nodes when sniffing fails on master eligible nodes</p>
 <div class="pre_wrapper lang-csharp">
-<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; Virtual.Elasticsearch
-    .Bootstrap(new[] {
-        new Node(new Uri("http://localhost:9200")),
-        new Node(new Uri("http://localhost:9201")),
-        new Node(new Uri("http://localhost:9202"), NotMasterEligible),
+<pre class="programlisting prettyprint lang-csharp">var audit = new Auditor(() =&gt; VirtualClusterWith
+    .Nodes(new[] {
+        new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
+        new Node(new Uri("http://localhost:9201")) { MasterEligible = true },
+        new Node(new Uri("http://localhost:9202")) { MasterEligible = false },
     })
     .Sniff(s =&gt; s.Fails(Always))
     .Sniff(s =&gt; s.OnPort(9202).Succeeds(Always))
-    .Ping(c=&gt;c.SucceedAlways())
-    .ClientCalls(r =&gt; r.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
