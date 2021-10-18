@@ -4757,7 +4757,7 @@ security-docs:
   Elastic Security/docs/7.8: b25b32a77b35ac298eea2026bdc2133210b2a969
   Elastic Security/docs/7.9: 40ac00a717e74be9977e2d3d9d439cd7a63c1a30
   Elastic Security/docs/7.x: 31401e8cb6762a3d73c5a3c431158cbd68024f26
-  Elastic Security/docs/main: db3b87deac29514280771227de18293f8723145a
+  Elastic Security/docs/main: local
 sense:
   Sense Editor for 4.x/docs/master: e4b27640c79c102d1e09941c4430092522338cff
 stack-docs:
