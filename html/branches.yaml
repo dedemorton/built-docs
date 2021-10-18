@@ -4386,9 +4386,9 @@ elasticsearch-py:
 elasticsearch-rs:
   Rust Client/docs/master: d52932e7b31346e2e6048c8c926bafba11d30b48
 elasticsearch-ruby:
-  Elasticsearch Guide/docs/examples/guide/main: 35e462e9b3e08c2e3a49f06572a281cf0ea5c64d
+  Elasticsearch Guide/docs/examples/guide/main: local
   Ruby Client/docs/7.x: 1a204c70ac48a57e3f4866a01a7723a4817bdfbd
-  Ruby Client/docs/main: 35e462e9b3e08c2e3a49f06572a281cf0ea5c64d
+  Ruby Client/docs/main: local
 enterprise-search-pubs:
   App Search Guide/app-search-docs/7.10: d1d0ecbfa74bdd36b7a5621f510564301efeae68
   App Search Guide/app-search-docs/7.11: 7a83260da0c1639ced5589f06100069392f84674
