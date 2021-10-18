@@ -4698,7 +4698,7 @@ logstash-docs:
   Logstash Reference/docs/master: a520547db7142d6897757613e002de95bc2a75b4
   Logstash Versioned Plugin Reference/docs/versioned-plugins/versioned_plugin_docs: 5f67a7d5b8fa153c58df6280b570d0d7306f6860
 observability-docs:
-  Fleet Developer Guide/docs/en/master: ab8228aea724581db1ba59922448287815cfcfc5
+  Fleet Developer Guide/docs/en/master: local
   Fleet and Elastic Agent Guide/docs/en/7.10: ddc82d4a92b65845098a534f9c080f2646194f4b
   Fleet and Elastic Agent Guide/docs/en/7.11: 31e495e42eb7ffc884208ed73a3aac9d127f4c9f
   Fleet and Elastic Agent Guide/docs/en/7.12: 1a1d7446392be7330c8fb767f0e177df7267e534
@@ -4708,7 +4708,7 @@ observability-docs:
   Fleet and Elastic Agent Guide/docs/en/7.8: 0bb5092b5cb4683cc12c4597ce9e706e05fb6544
   Fleet and Elastic Agent Guide/docs/en/7.9: 1988aa40e20d221d96fdcdb208795d2227b82f3c
   Fleet and Elastic Agent Guide/docs/en/7.x: 1462c0cab6d6a764c3a7a31b5324916b028df099
-  Fleet and Elastic Agent Guide/docs/en/master: ab8228aea724581db1ba59922448287815cfcfc5
+  Fleet and Elastic Agent Guide/docs/en/master: local
   Installation and Upgrade Guide/docs/en/observability/7.10: ddc82d4a92b65845098a534f9c080f2646194f4b
   Installation and Upgrade Guide/docs/en/observability/7.11: 31e495e42eb7ffc884208ed73a3aac9d127f4c9f
   Installation and Upgrade Guide/docs/en/observability/7.12: 1a1d7446392be7330c8fb767f0e177df7267e534
@@ -4716,8 +4716,8 @@ observability-docs:
   Installation and Upgrade Guide/docs/en/observability/7.14: b73436f76195b1c7c34f74861ae97fbb4d99c93d
   Installation and Upgrade Guide/docs/en/observability/7.15: 925f57f2352a71bc9fad62dc024c650b6161bb91
   Installation and Upgrade Guide/docs/en/observability/7.x: 1462c0cab6d6a764c3a7a31b5324916b028df099
-  Installation and Upgrade Guide/docs/en/observability/master: ab8228aea724581db1ba59922448287815cfcfc5
-  Integrations Developer Guide/docs/en/master: ab8228aea724581db1ba59922448287815cfcfc5
+  Installation and Upgrade Guide/docs/en/observability/master: local
+  Integrations Developer Guide/docs/en/master: local
   Logs Monitoring Guide for 7.5-7.9/docs/en/7.5: 8be931149fefc486a33cbd2ddfd510ed1e383497
   Logs Monitoring Guide for 7.5-7.9/docs/en/7.6: 747be7bd5082fedc41eeaeec24011d9d2efd532f
   Logs Monitoring Guide for 7.5-7.9/docs/en/7.7: 0b90be36054893af91c195a7cb7ebcbbc5a34d3c
@@ -4736,7 +4736,7 @@ observability-docs:
   Observability/docs/en/7.15: 925f57f2352a71bc9fad62dc024c650b6161bb91
   Observability/docs/en/7.9: 1988aa40e20d221d96fdcdb208795d2227b82f3c
   Observability/docs/en/7.x: 1462c0cab6d6a764c3a7a31b5324916b028df099
-  Observability/docs/en/master: ab8228aea724581db1ba59922448287815cfcfc5
+  Observability/docs/en/master: local
   Uptime Monitoring Guide for 7.2-7.9/docs/en/7.2: f9ef8e90836f47b8cc1987251f80a8fd9c6e84ad
   Uptime Monitoring Guide for 7.2-7.9/docs/en/7.3: 70974de1f45f4d90ca7be94aad6a49861700491f
   Uptime Monitoring Guide for 7.2-7.9/docs/en/7.4: e1d14f394f6e90a9c9b988d78e5d4cd38e71daeb
