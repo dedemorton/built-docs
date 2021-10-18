@@ -2148,7 +2148,7 @@ cloud-on-k8s:
   Elastic Cloud on Kubernetes/docs/1.6: 701758ac3c3152ba66564494e6c718fe34ccae77
   Elastic Cloud on Kubernetes/docs/1.7: ee6cfd9abda1726117b2442c2a8b7e45f242fc95
   Elastic Cloud on Kubernetes/docs/1.8: b3a5547c6f2f6cb096c4a29abaac6355dd046664
-  Elastic Cloud on Kubernetes/docs/master: c461f378efa7ce3b01eaa5b0a7b9b7e5ecce0e54
+  Elastic Cloud on Kubernetes/docs/master: local
 curator:
   Curator Index Management/docs/asciidoc/3.3: 51b06f64f70f38aaf081bf5d33a4139e1be6c4e3
   Curator Index Management/docs/asciidoc/3.4: 7aabdc1dbe7d0425dae2ecdf76aba2ff052ec037
