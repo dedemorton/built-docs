@@ -4380,9 +4380,9 @@ elasticsearch-php:
 elasticsearch-php-cn:
   PHP API/./cn: 2ebdc22260b51650d42abffbbc6539195acbe8bb
 elasticsearch-py:
-  Elasticsearch Guide/docs/examples/main: bf29c14dc8d371cc14f5c2b5ab9d98628987155c
+  Elasticsearch Guide/docs/examples/main: local
   Python Client/docs/guide/7.x: 44fae72e262ea0c2710ea554d3ce24d2517f2840
-  Python Client/docs/guide/main: bf29c14dc8d371cc14f5c2b5ab9d98628987155c
+  Python Client/docs/guide/main: local
 elasticsearch-rs:
   Rust Client/docs/master: d52932e7b31346e2e6048c8c926bafba11d30b48
 elasticsearch-ruby:
