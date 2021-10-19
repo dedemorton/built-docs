@@ -4706,7 +4706,7 @@ observability-docs:
   Fleet and Elastic Agent Guide/docs/en/7.11: 31e495e42eb7ffc884208ed73a3aac9d127f4c9f
   Fleet and Elastic Agent Guide/docs/en/7.12: 1a1d7446392be7330c8fb767f0e177df7267e534
   Fleet and Elastic Agent Guide/docs/en/7.13: 3e65260678a1444bbcd9e6c591e1bfb5ce7dacdf
-  Fleet and Elastic Agent Guide/docs/en/7.14: b73436f76195b1c7c34f74861ae97fbb4d99c93d
+  Fleet and Elastic Agent Guide/docs/en/7.14: local
   Fleet and Elastic Agent Guide/docs/en/7.15: 925f57f2352a71bc9fad62dc024c650b6161bb91
   Fleet and Elastic Agent Guide/docs/en/7.8: 0bb5092b5cb4683cc12c4597ce9e706e05fb6544
   Fleet and Elastic Agent Guide/docs/en/7.9: 1988aa40e20d221d96fdcdb208795d2227b82f3c
@@ -4716,7 +4716,7 @@ observability-docs:
   Installation and Upgrade Guide/docs/en/observability/7.11: 31e495e42eb7ffc884208ed73a3aac9d127f4c9f
   Installation and Upgrade Guide/docs/en/observability/7.12: 1a1d7446392be7330c8fb767f0e177df7267e534
   Installation and Upgrade Guide/docs/en/observability/7.13: 3e65260678a1444bbcd9e6c591e1bfb5ce7dacdf
-  Installation and Upgrade Guide/docs/en/observability/7.14: b73436f76195b1c7c34f74861ae97fbb4d99c93d
+  Installation and Upgrade Guide/docs/en/observability/7.14: local
   Installation and Upgrade Guide/docs/en/observability/7.15: 925f57f2352a71bc9fad62dc024c650b6161bb91
   Installation and Upgrade Guide/docs/en/observability/7.x: dcf869b24ebbbd914ed24a24700bc92edf8291b9
   Installation and Upgrade Guide/docs/en/observability/master: 9fb27532fa773f76ffd0c370f95ceb2fed350f7a
@@ -4735,7 +4735,7 @@ observability-docs:
   Observability/docs/en/7.11: 31e495e42eb7ffc884208ed73a3aac9d127f4c9f
   Observability/docs/en/7.12: 1a1d7446392be7330c8fb767f0e177df7267e534
   Observability/docs/en/7.13: 3e65260678a1444bbcd9e6c591e1bfb5ce7dacdf
-  Observability/docs/en/7.14: b73436f76195b1c7c34f74861ae97fbb4d99c93d
+  Observability/docs/en/7.14: local
   Observability/docs/en/7.15: 925f57f2352a71bc9fad62dc024c650b6161bb91
   Observability/docs/en/7.9: 1988aa40e20d221d96fdcdb208795d2227b82f3c
   Observability/docs/en/7.x: dcf869b24ebbbd914ed24a24700bc92edf8291b9
