@@ -75,11 +75,11 @@ apm-agent-rum-js:
   APM Real User Monitoring JavaScript Agent/docs/5.x: 479aeb47f6b28f2d9462cf8aefae05acaca31129
   APM Real User Monitoring JavaScript Agent/docs/master: 2c07c1e5e0445d7f84877305d0bd708234c817ee
 apm-server:
-  APM Guide/CHANGELOG.asciidoc/7.x: 044d918e15cc2a42aca1059220742acaa54c980a
+  APM Guide/CHANGELOG.asciidoc/7.x: local
   APM Guide/CHANGELOG.asciidoc/master: da26f4f53a38c2b91ce2aa8b7f59d3c34aefaa27
-  APM Guide/changelogs/7.x: 044d918e15cc2a42aca1059220742acaa54c980a
+  APM Guide/changelogs/7.x: local
   APM Guide/changelogs/master: da26f4f53a38c2b91ce2aa8b7f59d3c34aefaa27
-  APM Guide/docs/7.x: 044d918e15cc2a42aca1059220742acaa54c980a
+  APM Guide/docs/7.x: local
   APM Guide/docs/master: da26f4f53a38c2b91ce2aa8b7f59d3c34aefaa27
   APM Overview/docs/6.0: ae191ba5dd9c07cd567cf3f55e7e1433902fb9fc
   APM Overview/docs/6.1: e5bfd57830cfe07435a1ad057fc61116e6357a06
@@ -214,7 +214,7 @@ apm-server:
   Fleet and Elastic Agent Guide/docs/7.13: cff29a0e9e251c685adc396a94ba1d903c0c78ec
   Fleet and Elastic Agent Guide/docs/7.14: cd8c96fa751fcca7b9be5bc77d5e59c810164199
   Fleet and Elastic Agent Guide/docs/7.15: c913cf29b49dbea9d9280a3bea26394de6b808fe
-  Fleet and Elastic Agent Guide/docs/7.x: b053a3635a70342550ee7149bded3bb7e9ded486
+  Fleet and Elastic Agent Guide/docs/7.x: local
   Fleet and Elastic Agent Guide/docs/master: 7061fe24102dbb563f3ad40b937e6a1656710dd2
   Installation and Upgrade Guide/docs/guide/7.0: 52be7fe64897131117148fa9f5e4b7757c76814f
   Installation and Upgrade Guide/docs/guide/7.1: 3c8032e7bd5bbeb809f734ecfaa8a7cd620febaf
@@ -232,7 +232,7 @@ apm-server:
   Installation and Upgrade Guide/docs/guide/7.7: 843c551afc3af54dcb957ae776466e7390d36010
   Installation and Upgrade Guide/docs/guide/7.8: 389f32b2ffc21c5b32ed962ea85f6b7f0ffed01d
   Installation and Upgrade Guide/docs/guide/7.9: c786de54fdedb1201399005e6e4c8fb9e0cdf44e
-  Installation and Upgrade Guide/docs/guide/7.x: e759327d40a8d9de087cddc0428d807c2ed99d83
+  Installation and Upgrade Guide/docs/guide/7.x: local
   Installation and Upgrade Guide/docs/guide/master: 3b228e4e945613125826ea913cee2f340121fc0d
   Observability/docs/7.10: 556316b18ed2010c01d77728fe867edbd14e31a5
   Observability/docs/7.11: b47faa9aad515043f703fcc052410b027bd51285
@@ -241,7 +241,7 @@ apm-server:
   Observability/docs/7.14: cd8c96fa751fcca7b9be5bc77d5e59c810164199
   Observability/docs/7.15: c913cf29b49dbea9d9280a3bea26394de6b808fe
   Observability/docs/7.9: c786de54fdedb1201399005e6e4c8fb9e0cdf44e
-  Observability/docs/7.x: 044d918e15cc2a42aca1059220742acaa54c980a
+  Observability/docs/7.x: local
   Observability/docs/master: da26f4f53a38c2b91ce2aa8b7f59d3c34aefaa27
 azure-marketplace:
   Azure Marketplace and Resource Manager (ARM) template/docs/6.3: 633c9f5044df0acd25bc42b1a2d8acef126bba39
