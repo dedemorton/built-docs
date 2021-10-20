@@ -4,12 +4,12 @@ apm-agent-dotnet:
   APM .NET Agent/CHANGELOG.asciidoc/1.11: ca11381c8840632c65925393de57797871b359c5
   APM .NET Agent/CHANGELOG.asciidoc/1.8: 44df82c6553b48b128437c62ded3141c12e16a52
   APM .NET Agent/CHANGELOG.asciidoc/1.9: 6abd35c3e59abdd7c8074b92c415f0695a0f1d7e
-  APM .NET Agent/CHANGELOG.asciidoc/master: b1d3e52bd12e06a36f1b74bc5e296e7e74f03095
+  APM .NET Agent/CHANGELOG.asciidoc/master: local
   APM .NET Agent/docs/1.10: 22ff88041551c6be868c31e8c1ab63f79edeaf66
   APM .NET Agent/docs/1.11: ca11381c8840632c65925393de57797871b359c5
   APM .NET Agent/docs/1.8: 44df82c6553b48b128437c62ded3141c12e16a52
   APM .NET Agent/docs/1.9: 6abd35c3e59abdd7c8074b92c415f0695a0f1d7e
-  APM .NET Agent/docs/master: b1d3e52bd12e06a36f1b74bc5e296e7e74f03095
+  APM .NET Agent/docs/master: local
 apm-agent-go:
   APM Go Agent/CHANGELOG.asciidoc/1.x: 5517149abbeea3794366550372e3299a28bbf9b4
   APM Go Agent/CHANGELOG.asciidoc/master: 27abca23207b669b6761c307915141026b68d8d8
@@ -2131,11 +2131,6 @@ cloud:
   'Elastic Cloud Enterprise - Elastic Cloud on your Infrastructure/docs/shared/ms-59': 8116c2ec010971604f0e46e84f8d2afeee226247
   'Elastic Cloud Enterprise - Elastic Cloud on your Infrastructure/docs/shared/ms-62': d8e2878b9da9f182281aef07b56b36b9042f2e22
   'Elastic Cloud Enterprise - Elastic Cloud on your Infrastructure/docs/shared/release-ms-41': 24cd5d8a3f82bed04999fa8a96ce7934b83780db
-  'Elasticsearch Add-On for Heroku - Hosted Elasticsearch and Kibana for Heroku Users/docs/heroku/ms-63': ced1e00ae6e4d5e6b895fa4a4e2fb8b8e78498d9
-  'Elasticsearch Add-On for Heroku - Hosted Elasticsearch and Kibana for Heroku Users/docs/saas/ms-63': ced1e00ae6e4d5e6b895fa4a4e2fb8b8e78498d9
-  'Elasticsearch Add-On for Heroku - Hosted Elasticsearch and Kibana for Heroku Users/docs/shared/ms-63': ced1e00ae6e4d5e6b895fa4a4e2fb8b8e78498d9
-  'Elasticsearch Service - Hosted Elastic Stack/docs/saas/ms-63': ced1e00ae6e4d5e6b895fa4a4e2fb8b8e78498d9
-  'Elasticsearch Service - Hosted Elastic Stack/docs/shared/ms-63': ced1e00ae6e4d5e6b895fa4a4e2fb8b8e78498d9
 cloud-assets:
   'Elastic Cloud Enterprise - Elastic Cloud on your Infrastructure/docs/master': 110fc8b22cf38419bb8689eb5cca6c56175969e7
 cloud-on-k8s:
